@@ -17,3 +17,12 @@ function gId(id) {
 function num(id, val) {
   document.getElementById(id).innerText = val;
 }
+
+function forin(obj, callback) {
+  var ii;
+  for (ii in obj) {
+    if (obj.hasOwnProperty(ii)) {
+      callback(obj[ii], ii, obj);
+    }
+  }
+}
