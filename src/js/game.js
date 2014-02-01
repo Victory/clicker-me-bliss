@@ -70,7 +70,6 @@ var Game = function() {
 
     setInterval(
       function () {
-        console.log('running');
         var ii;
         for (ii in g.items) {
           if (g.items.hasOwnProperty(ii)) {
