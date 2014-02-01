@@ -15,7 +15,7 @@ function gId(id) {
 }
 
 function num(id, val) {
-  document.getElementById(id).innerText = val;
+  document.getElementById(id).innerText = val.toFixed(0);
 }
 
 function forin(obj, callback) {
