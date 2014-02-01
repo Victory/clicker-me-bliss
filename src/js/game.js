@@ -98,7 +98,7 @@ var Game = function(items) {
             } else if(item.type === 'good' &&
                       item.owned > 0) {
               var jj = 0;
-              while (g[item.resource] >= item.resourceCost &&
+              while (g[item.resource] - item.resourceCost > 0 &&
                     jj <= item.owned) {
                 jj += 1;
                 g[item.resource] -= item.resourceCost * item.owned;
