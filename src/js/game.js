@@ -21,31 +21,37 @@ var Game = function() {
     }.bind(this);
   };
 
+  this.forin = function (obj, callback) {
+    forin(obj, callback.bind(this));
+  };
+
   this.spend = function (id) {
 
     return function (evt) {
       var itemInfo = this.items[id];
       var noMonies = false;
-      var ii;
 
-      for (ii in itemInfo.price) {
-        if (itemInfo.price.hasOwnProperty(ii)) {
-          if (this[ii] < itemInfo.price[ii]) {
+      this.forin(
+        itemInfo.price,
+        function (price, ii) {
+          if (this[ii] < price) {
             noMonies = true;
           }
         }
-      }
+      );
+
       if (noMonies) {
         console.log("No Monies!");
         return;
       }
 
-      for (ii in itemInfo.price) {
-        if (itemInfo.price.hasOwnProperty(ii)) {
+      this.forin(
+        itemInfo.price,
+        function (price, ii) {
           this[ii] = this[ii] - itemInfo.price[ii];
           num('t' + ii, this[ii]);
         }
-      }
+      );
 
       this.items[id].owned++;
       num('t' + id,  this.items[id].owned);
