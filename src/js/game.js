@@ -8,7 +8,7 @@ var Game = function() {
         r1: 20
       },
       resource: 'r1',
-      modifier: 5,
+      modifier: 1,
       owned: 0
     }
   };
@@ -68,6 +68,18 @@ var Game = function() {
     num('tr1', g.r1);
     num('ti1', g.items.i1.owned);
 
+    setInterval(
+      function () {
+        console.log('running');
+        var ii;
+        for (ii in g.items) {
+          if (g.items.hasOwnProperty(ii)) {
+            var item = g.items[ii];
+            g[item.resource] += item.owned * item.modifier;
+            num("t" + item.resource, g[item.resource]);
+          }
+        }
+      }, 1000);
   }(this));
 };
 
