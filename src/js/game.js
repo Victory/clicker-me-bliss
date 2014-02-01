@@ -9,6 +9,7 @@ var Game = function() {
       },
       resource: 'r1',
       modifier: 1,
+      priceJump: 1.01,
       owned: 0
     }
   };
@@ -47,9 +48,11 @@ var Game = function() {
 
       this.forin(
         itemInfo.price,
-        function (price, ii) {
-          this[ii] = this[ii] - itemInfo.price[ii];
+        function (price, ii, item) {
+          this[ii] = this[ii] - price;
+          this.items[id].price[ii] *= this.items[id].priceJump;
           num('t' + ii, this[ii]);
+          num("c" + id, this.items[id].price[ii]);
         }
       );
 
