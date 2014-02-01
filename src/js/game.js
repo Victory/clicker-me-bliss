@@ -28,9 +28,11 @@ var Game = function() {
       var noMonies = false;
       var ii;
 
-      for (ii = 0; i < itemInfo.price.length; ii++) {
-        if (this[ii] < itemInfo[ii].price[ii]) {
-          noMonies = true;
+      for (ii in itemInfo.price) {
+        if (itemInfo.price.hasOwnProperty(ii)) {
+          if (this[ii] < itemInfo.price[ii]) {
+            noMonies = true;
+          }
         }
       }
       if (noMonies) {
@@ -38,10 +40,13 @@ var Game = function() {
         return;
       }
 
-      for (ii = 0; i < itemInfo.price.length; ii++) {
-        this[ii] = this[ii] - itemInfo.price[ii];
-        num('t' + ii, this[ii]);
+      for (ii in itemInfo.price) {
+        if (itemInfo.price.hasOwnProperty(ii)) {
+          this[ii] = this[ii] - itemInfo.price[ii];
+          num('t' + ii, this[ii]);
+        }
       }
+
       this.items[id].owned++;
       num('t' + id,  this.items[id].owned);
       this.totalClicks++;
@@ -62,6 +67,7 @@ var Game = function() {
 
     num('tr1', g.r1);
     num('ti1', g.items.i1.owned);
+
   }(this));
 };
 

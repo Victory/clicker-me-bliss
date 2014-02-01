@@ -16,4 +16,4 @@ function gId(id) {
 
 function num(id, val) {
   document.getElementById(id).innerText = val;
-}      this
+}
