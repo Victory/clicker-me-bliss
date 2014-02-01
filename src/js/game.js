@@ -17,7 +17,6 @@ var Game = function(items) {
   };
 
   this.spend = function (id) {
-
     return function (evt) {
       var itemInfo = this.items[id];
       var noMonies = false;
@@ -45,16 +44,38 @@ var Game = function(items) {
 
       this.items[id].owned++;
       num('t' + id,  this.items[id].owned);
+      num("o" + id, this.items[id].owned);
       this.totalClicks++;
+    }.bind(this);
+  };
+
+  this.sell = function (id) {
+    return function (evt) {
+      var item = this.items[id];
+      if (item.owned > 0) {
+        this.items[id].owned -= 1;
+        num("t" + item.good, g[item.good]);
+        num("o" + id, item.owned);
+        console.log("You don't own any");
+        return;
+      }
     }.bind(this);
   };
 
   this.bindSpend = function(id) {
     bind(gId(id),'click', this.spend(id));
+    this.bindSell(id);
   };
 
   this.bindClick= function(id) {
     bind(gId(id),'click', this.click(id));
+  };
+
+  this.bindSell = function(id) {
+    var btn = gId("s" + id);
+    if (btn) {
+      bind(btn,'click', this.sell(id));
+    }
   };
 
   var constructor = (function (g) {
@@ -83,7 +104,9 @@ var Game = function(items) {
                 g[item.resource] -= item.resourceCost * item.owned;
                 g[item.good] += item.owned;
                 num("t" + item.good, g[item.good]);
+                num("o" + item.good, item.owned);
                 num("t" + item.resource, g[item.resource]);
+
               }
             }
           }
