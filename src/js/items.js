@@ -2,8 +2,14 @@ var Gitems = {
   r1: {
     name: 'resource 1',
     type: 'resource',
-    total: 50,
+    total: 1,
     resource: 'r1'
+  },
+  r2: {
+    name: 'resource 2',
+    type: 'resource',
+    total: 2,
+    resource: 'r2'
   },
   i1: {
     name: '1 more clicks',
