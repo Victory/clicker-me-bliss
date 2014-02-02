@@ -111,9 +111,20 @@ var Game = function(items) {
   };
 
   var constructor = (function (g) {
-    g.bindClick('r1');
-    g.bindBuyGoodCreator('g1');
-    g.bindBuyResourceCreator('i1');
+
+    forin(
+      g.items,
+      function (item, resource) {
+        if (item.type === 'resource') {
+          g.bindClick(resource);
+        } else if (item.type === 'item') {
+          g.bindBuyResourceCreator(resource);
+        } else if (item.type === 'good') {
+          g.bindBuyGoodCreator('g1');
+        }
+        //
+      }
+    );
 
     g.updateCounters();
 
