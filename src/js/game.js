@@ -18,6 +18,18 @@ var Game = function(items) {
     console.log(msg);
   };
 
+  this.updateItem = function(g, item) {
+    var ii = 0;
+    for (kk = 0; kk < item.owned; kk++) {
+      if (g.items[item.resource].total + item.owned > item.maxStorage) {
+        g.items[item.resource].total -=
+          0.25 * (g.items[item.resource].total - item.maxStorage);
+      } else {
+        g.items[item.resource].total += item.owned;
+      }
+    }
+  };
+
   this.updateCounters = function() {
     this.forin (
       this.items,
@@ -136,7 +148,7 @@ var Game = function(items) {
              g.items[ii].owned > 0) {
             var item = g.items[ii];
             if (item.type === 'item') {
-              g.items[item.resource].total += item.owned * item.modifier;
+              g.updateItem(g, item);
             } else if(item.type === 'good') {
               var jj = 1;
               while (g.items[item.resource].total >= item.resourceCost &&
