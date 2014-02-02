@@ -31,7 +31,8 @@ var Gitems = {
     resource: 'r2',
     modifier: 1,
     priceJump: 1.1,
-    owned: 0
+    owned: 0,
+    maxStorage: 10
   },
   i3: {
     name: '1 more clicks on r2',
@@ -43,7 +44,8 @@ var Gitems = {
     resource: 'r1',
     modifier: 2,
     priceJump: 1.1,
-    owned: 0
+    owned: 0,
+    maxStorage: 500
   },
   g1: {
     name: "convert resource 1 to good 1",
@@ -58,6 +60,7 @@ var Gitems = {
     modifier: 1,
     priceJump: 1.1,
     owned: 0,
-    total: 0
+    total: 0,
+    maxStorage: 500
   }
 };
