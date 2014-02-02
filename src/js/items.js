@@ -1,4 +1,10 @@
 var Gitems = {
+  r1: {
+    name: 'resource 1',
+    type: 'resource',
+    total: 50,
+    resource: 'r1'
+  },
   i1: {
     name: '1 more clicks',
     type: 'item',

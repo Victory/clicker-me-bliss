@@ -1,14 +1,12 @@
 var Game = function(items) {
-  this.r1 = 50;
-  this.g1 = 0;
   this.totalClicks = 0;
   this.items = items;
 
   this.click = function(id) {
     return function (evt) {
       this.totalClicks++;
-      this[id]++;
-      num('t' + id, this[id]);
+      this.items[id].total++;
+      num('t' + id, this.items[id].total);
     }.bind(this);
   };
 
@@ -21,18 +19,17 @@ var Game = function(items) {
   };
 
   this.updateCounters = function() {
-    num('tr1', this.r1);
-
     this.forin (
       this.items,
       function (item, name, items) {
-        if (item.type === 'item') {
+        if (item.type === 'resource') {
+          num('t' + item.resource, item.total);
+        } else if (item.type === 'item') {
           num('o' + name, item.owned);
           forin(item.price, function (price, resource) {
             num('p' + name + resource, price);
           });
-        }
-        if (item.type === 'good') {
+        }else if (item.type === 'good') {
           forin(item.price, function (price, resource) {
             num('p' + name + resource, price);
           });
@@ -51,7 +48,7 @@ var Game = function(items) {
       this.forin(
         itemInfo.price,
         function (price, ii) {
-          if (this[ii] < price) {
+          if (this.items[ii].total < price) {
             noMonies = true;
           }
         }
@@ -63,7 +60,7 @@ var Game = function(items) {
       this.forin(
         itemInfo.price,
         function (price, ii, item) {
-          this[ii] = this[ii] - price;
+          this.items[ii].total = this.items[ii].total - price;
           this.items[id].price[ii] *= this.items[id].priceJump;
         }
       );
@@ -115,7 +112,6 @@ var Game = function(items) {
 
   var constructor = (function (g) {
     g.bindClick('r1');
-    //g.bindSpend('i1');
     g.bindBuyGoodCreator('g1');
     g.bindBuyResourceCreator('i1');
 
@@ -127,17 +123,17 @@ var Game = function(items) {
         for (ii in g.items) {
           if (g.items.hasOwnProperty(ii)) {
             var item = g.items[ii];
+            if (item.owned === 0) {
+              continue;
+            }
             if (item.type === 'item') {
-              g[item.resource] += item.owned * item.modifier;
-              num("t" + item.resource, g[item.resource]);
-            } else if(item.type === 'good' &&
-                      item.owned > 0) {
-              var jj = 0;
-              while (g[item.resource] - item.resourceCost > 0 &&
+              g.items[item.resource].total += item.owned * item.modifier;
+            } else if(item.type === 'good') {
+              var jj = 1;
+              while (g.items[item.resource].total >= item.resourceCost &&
                     jj <= item.owned) {
-                console.log(g[item.good], item.owned);
                 jj += 1;
-                g[item.resource] -= item.resourceCost * item.owned;
+                g.items[item.resource].total -= item.resourceCost;
                 g.items[item.good].total += item.owned;
               }
             }
