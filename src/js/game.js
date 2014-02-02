@@ -132,11 +132,9 @@ var Game = function(items) {
       function () {
         var ii;
         for (ii in g.items) {
-          if (g.items.hasOwnProperty(ii)) {
+          if (g.items.hasOwnProperty(ii) &&
+             g.items[ii].owned > 0) {
             var item = g.items[ii];
-            if (item.owned === 0) {
-              continue;
-            }
             if (item.type === 'item') {
               g.items[item.resource].total += item.owned * item.modifier;
             } else if(item.type === 'good') {

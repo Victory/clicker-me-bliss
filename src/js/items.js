@@ -12,12 +12,23 @@ var Gitems = {
     resource: 'r2'
   },
   i1: {
-    name: '1 more clicks',
+    name: '1 more clicks on r1',
     type: 'item',
     price: {
       r1: 5
     },
     resource: 'r1',
+    modifier: 1,
+    priceJump: 1.1,
+    owned: 0
+  },
+  i2: {
+    name: '1 more clicks on r2',
+    type: 'item',
+    price: {
+      r2: 5
+    },
+    resource: 'r2',
     modifier: 1,
     priceJump: 1.1,
     owned: 0
