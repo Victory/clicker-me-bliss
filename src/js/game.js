@@ -21,9 +21,11 @@ var Game = function(items) {
   this.updateItem = function(g, item) {
     var ii = 0;
     for (kk = 0; kk < item.owned; kk++) {
-      if (g.items[item.resource].total + item.owned > item.maxStorage) {
+      var total = g.items[item.resource].total;
+      var maxStorage = g.items[item.resource].maxStorage;
+      if (total + item.owned > maxStorage) {
         g.items[item.resource].total -=
-          0.25 * (g.items[item.resource].total - item.maxStorage);
+          0.25 * (total - maxStorage);
       } else {
         g.items[item.resource].total += item.owned;
       }
@@ -36,6 +38,8 @@ var Game = function(items) {
       function (item, name, items) {
         if (item.type === 'resource') {
           num('t' + item.resource, item.total);
+          num('ps' + item.resource, item.maxStoragePrice);
+          num('ms' + item.resource, item.maxStorage);
         } else if (item.type === 'item') {
           num('o' + name, item.owned);
           forin(item.price, function (price, resource) {
@@ -101,6 +105,21 @@ var Game = function(items) {
     }.bind(this);
   };
 
+  this.buyStorage = function(id) {
+    return function (evt) {
+      var item = this.items[id];
+      if (this.items[id].total < item.maxStoragePrice) {
+        this.log("You can't afford that");
+        return;
+      }
+      this.items[id].total -= item.maxStoragePrice;
+      this.items[id].maxStorage *= item.maxStorageJump;
+      this.items[id].maxStoragePrice *= item.maxStoragePriceJump;
+
+      this.updateCounters();
+    }.bind(this);
+  };
+
   this.bindBuyGoodCreator = function(id) {
     bind(gId(id),'click', this.buyGoodCreator(id));
     this.bindSell(id);
@@ -122,6 +141,13 @@ var Game = function(items) {
     }
   };
 
+  this.bindBuyStorage = function (id) {
+    var btn = gId("s" + id);
+    if (btn) {
+      bind(btn,'click', this.buyStorage(id));
+    }
+  };
+
   var constructor = (function (g) {
 
     forin(
@@ -129,6 +155,7 @@ var Game = function(items) {
       function (item, resource) {
         if (item.type === 'resource') {
           g.bindClick(resource);
+          g.bindBuyStorage(resource);
         } else if (item.type === 'item') {
           g.bindBuyResourceCreator(resource);
         } else if (item.type === 'good') {
@@ -163,6 +190,7 @@ var Game = function(items) {
         g.updateCounters();
       }, 1000);
   }(this));
+
 };
 
 g = new Game(Gitems);
