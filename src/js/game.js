@@ -23,11 +23,11 @@ var Game = function(items) {
     for (kk = 0; kk < item.owned; kk++) {
       var total = g.items[item.resource].total;
       var maxStorage = g.items[item.resource].maxStorage;
-      if (total + item.owned > maxStorage) {
+      if (total + 1 > maxStorage) {
         g.items[item.resource].total -=
           0.25 * (total - maxStorage);
       } else {
-        g.items[item.resource].total += item.owned;
+        g.items[item.resource].total += 1;
       }
     }
   };
