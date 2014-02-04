@@ -16,7 +16,11 @@ function gId(id) {
 
 function num(id, val) {
   //console.log(id, val);
-  document.getElementById(id).innerText = val.toFixed(0);
+  try {
+    document.getElementById(id).innerText = val.toFixed(0);
+  } catch (err) {
+    console.log(err.message, id, val);
+  }
 }
 
 function forin(obj, callback) {
