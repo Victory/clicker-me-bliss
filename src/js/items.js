@@ -68,5 +68,21 @@ var Gitems = {
     owned: 0,
     total: 0,
     maxStorage: 500
+  },
+  g2: {
+    name: "convert resource 2 to good 2",
+    type: 'good',
+    price: {
+      r2: 5
+    },
+    resource: 'r2',
+    resourceCost: 5,
+    winRate: 0.5,
+    good: 'g2',
+    modifier: 1,
+    priceJump: 1.1,
+    owned: 0,
+    total: 0,
+    maxStorage: 500
   }
 };

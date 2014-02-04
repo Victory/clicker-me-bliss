@@ -159,7 +159,7 @@ var Game = function(items) {
         } else if (item.type === 'item') {
           g.bindBuyResourceCreator(resource);
         } else if (item.type === 'good') {
-          g.bindBuyGoodCreator('g1');
+          g.bindBuyGoodCreator(item.good);
         }
         //
       }
