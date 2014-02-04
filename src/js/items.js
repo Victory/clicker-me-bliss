@@ -2,7 +2,7 @@ var Gitems = {
   r1: {
     name: 'resource 1',
     type: 'resource',
-    total: 1,
+    total: 0,
     resource: 'r1',
     maxStorage: 10,
     maxStoragePrice: 5,
@@ -12,7 +12,7 @@ var Gitems = {
   r2: {
     name: 'resource 2',
     type: 'resource',
-    total: 2,
+    total: 0,
     resource: 'r2',
     maxStorage: 10,
     maxStoragePrice: 5,
