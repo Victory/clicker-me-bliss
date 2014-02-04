@@ -193,4 +193,4 @@ var Game = function(items) {
 
 };
 
-g = new Game(Gitems);
+theGame = new Game(Gitems);

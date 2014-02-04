@@ -15,9 +15,11 @@ function gId(id) {
 }
 
 function num(id, val) {
-  //console.log(id, val);
   try {
-    document.getElementById(id).innerText = val.toFixed(0);
+    text = document.createTextNode(val.toFixed(0).toString());
+    elm = document.getElementById(id);
+    elm.innerHTML = '';
+    elm.appendChild(text);
   } catch (err) {
     console.log(err.message, id, val);
   }
