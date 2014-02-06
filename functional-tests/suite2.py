@@ -1,5 +1,6 @@
 import os
 import json
+from pprint import pprint as pp
 
 from selenium import webdriver
 
@@ -20,6 +21,7 @@ class Suite2(object):
         self.driver = webdriver.Firefox()
         self.driver.get(HOME + "index.html")
         self.read_items()
+        self.run_tests()
 
     def read_items(self):
         f = open(BASEDIR + "/src/js/items.js", 'r')
@@ -30,7 +32,7 @@ class Suite2(object):
         obj = items
         for kk, vv in obj.iteritems():
             self.elms[kk] = self.driver.find_element_by_id(kk)
-            if vv['type'] == "resouces":
+            if vv['type'] == "resource":
                 for prefix in ['t', 's', 'ps', 'ms']:
                     self.elms[prefix + kk] = \
                         self.driver.find_element_by_id(prefix + kk)
@@ -53,6 +55,21 @@ class Suite2(object):
         for elm in self.elms:
             assert type(self.elms[elm]) == \
                 webdriver.remote.webelement.WebElement
+
+    def click_r(name, num=1):
+        for ii in xrange(num):
+            self.elms[name].click()
+
+    def test_click_resource(self):
+        self.click_r('r1', 1)
+        assert self.tr1.text == '1'
+        self.click_r('r1', 9)
+        assert self.tr1.text == '10'
+
+    def run_tests(self):
+        for name in dir(self):
+            if name[0:5] == 'test_':
+                getattr(self, name)()
 
     def __getattr__(self, name):
         if name in self.elms:
