@@ -18,10 +18,15 @@ class Suite2(object):
     elms = {}
 
     def __init__(self):
+        self.run_tests()
+
+    def setUpTest(self):
         self.driver = webdriver.Firefox()
         self.driver.get(HOME + "index.html")
         self.read_items()
-        self.run_tests()
+
+    def tearDownTest(self):
+        self.driver.close()
 
     def read_items(self):
         f = open(BASEDIR + "/src/js/items.js", 'r')
@@ -56,25 +61,52 @@ class Suite2(object):
             assert type(self.elms[elm]) == \
                 webdriver.remote.webelement.WebElement
 
-    def click_r(name, num=1):
+    def click_r(self, name, num=1):
         for ii in xrange(num):
             self.elms[name].click()
 
-    def test_click_resource(self):
-        self.click_r('r1', 1)
-        assert self.tr1.text == '1'
-        self.click_r('r1', 9)
-        assert self.tr1.text == '10'
+    def click_sr(self, name, num=1):
+        for ii in xrange(num):
+            self.elms["s" + name].click()
+
+    def click_sr_test(self, name, num=1):
+        elm = self.elms["s" + name]
+        ms = self.elms["ms" + name]
+        start = int(ms.text)
+        for ii in xrange(num):
+            elm.click()
+        fin = int(ms.text)
+        assert fin == start + num
+
+    def click_r_test(self, name, num=1):
+        tr = self.elms["t" + name]
+        start = int(tr.text)
+        self.click_r(name, num)
+        fin = int(tr.text)
+        assert int(tr.text) == start + num
+
+    def test_click_resources(self):
+        self.click_r_test('r1', 1)
+        self.click_r_test('r1', 9)
+
+    def test_buy_storage(self):
+        num_storage_to_buy = 2
+        for ii in xrange(num_storage_to_buy):
+            self.click_r_test('r1', int(self.psr1.text))
+            self.click_sr('r1', 1)
 
     def run_tests(self):
         for name in dir(self):
             if name[0:5] == 'test_':
+                self.setUpTest()
                 getattr(self, name)()
+                self.tearDownTest()
 
     def __getattr__(self, name):
         if name in self.elms:
             return self.elms[name]
-        raise ValueError(name + " not set")
+        msg = "'" + name + "'" + " not set"
+        raise ValueError(msg)
 
 if __name__ == '__main__':
     s2 = Suite2()
