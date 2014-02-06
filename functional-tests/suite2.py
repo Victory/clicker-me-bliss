@@ -41,6 +41,14 @@ class Suite2(object):
                     self.elms['p' + kk + resource] = \
                         self.driver.find_element_by_id('p' + kk + resource)
 
+            if vv['type'] == 'good':
+                for prefix in ['o', 't', 's']:
+                    self.elms[prefix + kk] = \
+                        self.driver.find_element_by_id(prefix + kk)
+                for resource in vv['price']:
+                    self.elms['p' + kk + resource] = \
+                        self.driver.find_element_by_id('p' + kk + resource)
+
         # check that all elms are in fact WebElement
         for elm in self.elms:
             assert type(self.elms[elm]) == \
