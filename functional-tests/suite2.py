@@ -1,6 +1,5 @@
 import os
 import json
-from pprint import pprint as pp
 
 from selenium import webdriver
 
@@ -83,7 +82,19 @@ class Suite2(object):
         start = int(tr.text)
         self.click_r(name, num)
         fin = int(tr.text)
-        assert int(tr.text) == start + num
+        assert fin == start + num
+
+    def click_i(self, name, num=1):
+        elm = self.elms[name]
+        for ii in xrange(num):
+            elm.click()
+
+    def click_i_test(self, name, num=1):
+        oi = self.elms["i" + name]
+        start = int(oi.text)
+        self.click_i(name, num)
+        fin = int(oi.text)
+        assert fin == start + num
 
     def test_click_resources(self):
         self.click_r_test('r1', 1)
@@ -94,6 +105,10 @@ class Suite2(object):
         for ii in xrange(num_storage_to_buy):
             self.click_r_test('r1', int(self.psr1.text))
             self.click_sr('r1', 1)
+
+    def test_buy_item(self):
+        self.click_r_test('r1', int(self.pi1r1.text))
+        self.click_i('i1', 1)
 
     def run_tests(self):
         for name in dir(self):
