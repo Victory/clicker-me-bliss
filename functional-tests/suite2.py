@@ -1,5 +1,6 @@
 import os
 import json
+from time import sleep
 
 from selenium import webdriver
 
@@ -15,6 +16,7 @@ class Suite2(object):
     """
 
     elms = {}
+    sleep = 1
 
     def __init__(self):
         self.run_tests()
@@ -90,7 +92,7 @@ class Suite2(object):
             elm.click()
 
     def click_i_test(self, name, num=1):
-        oi = self.elms["i" + name]
+        oi = self.elms["o" + name]
         start = int(oi.text)
         self.click_i(name, num)
         fin = int(oi.text)
@@ -108,7 +110,11 @@ class Suite2(object):
 
     def test_buy_item(self):
         self.click_r_test('r1', int(self.pi1r1.text))
-        self.click_i('i1', 1)
+        self.click_i_test('i1', 1)
+        start = int(self.tr1.text)
+        sleep(self.sleep)
+        now = int(self.tr1.text)
+        assert  now == 1 + start
 
     def run_tests(self):
         for name in dir(self):
