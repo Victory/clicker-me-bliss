@@ -116,6 +116,18 @@ class Suite2(object):
         now = int(self.tr1.text)
         assert  now == 1 + start
 
+    def test_buy_good(self):
+        self.click_r_test('r1', int(self.pg1r1.text))
+        starto = int(self.og1.text)
+        startt = int(self.tg1.text)
+        self.g1.click()
+        assert int(self.og1.text) == starto + 1
+        # hack because there is not a way just yet to see how many
+        # goods it costs to create a good
+        self.click_r_test('r1', 5)
+        sleep(1)
+        assert int(self.tg1.text) == startt + 1
+
     def run_tests(self):
         for name in dir(self):
             if name[0:5] == 'test_':
