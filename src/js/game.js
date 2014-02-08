@@ -201,4 +201,6 @@ var Game = function(items) {
 
 };
 
-new Game(Gitems);
+(function() {
+  var n = new Game(Gitems);
+}());
