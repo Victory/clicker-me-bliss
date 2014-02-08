@@ -84,5 +84,22 @@ var Gitems = {
     "owned": 0,
     "total": 0,
     "maxStorage": 500
+  },
+  "b1": {
+    "name": "barrack 1",
+    "type": "barrack",
+    "price": {
+      "g1": 20,
+      "g2": 20
+    },
+    "priceProgress": {
+      "g1": 0,
+      "g2": 0
+    },
+    "unit": "d1",
+    "maintence": {
+      "r1": 5
+    },
+    "owned": false
   }
 };
