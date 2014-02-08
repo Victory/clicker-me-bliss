@@ -32,6 +32,16 @@ var Game = function(items) {
     }
   };
 
+  this.updateGood = function(g, item) {
+    var jj = 1;
+    while (g.items[item.resource].total >= item.resourceCost &&
+           jj <= item.owned) {
+      jj += 1;
+      g.items[item.resource].total -= item.resourceCost;
+      g.items[item.good].total += item.owned;
+    }
+  };
+
   this.updateCounters = function() {
     this.forin (
       this.items,
@@ -177,13 +187,7 @@ var Game = function(items) {
             if (item.type === 'item') {
               g.updateItem(g, item);
             } else if(item.type === 'good') {
-              var jj = 1;
-              while (g.items[item.resource].total >= item.resourceCost &&
-                    jj <= item.owned) {
-                jj += 1;
-                g.items[item.resource].total -= item.resourceCost;
-                g.items[item.good].total += item.owned;
-              }
+              g.updateGood(g, item);
             }
           }
         }

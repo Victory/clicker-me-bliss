@@ -125,7 +125,7 @@ class Suite2(object):
         # hack because there is not a way just yet to see how many
         # goods it costs to create a good
         self.click_r_test('r1', 5)
-        sleep(1)
+        sleep(1.1)
         assert int(self.tg1.text) == startt + 1
 
     def run_tests(self):
