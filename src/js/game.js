@@ -18,6 +18,22 @@ var Game = function(items) {
     console.log(msg);
   };
 
+  this.updateAllItems = function(g) {
+    var ii;
+    for (ii in g.items) {
+      if (g.items.hasOwnProperty(ii) &&
+          g.items[ii].owned > 0) {
+        var item = g.items[ii];
+        if (item.type === 'item') {
+          g.updateItem(g, item);
+        } else if(item.type === 'good') {
+          g.updateGood(g, item);
+        }
+      }
+    }
+    g.updateCounters();
+  };
+
   this.updateItem = function(g, item) {
     var ii = 0;
     for (kk = 0; kk < item.owned; kk++) {
@@ -179,22 +195,10 @@ var Game = function(items) {
 
     setInterval(
       function () {
-        var ii;
-        for (ii in g.items) {
-          if (g.items.hasOwnProperty(ii) &&
-             g.items[ii].owned > 0) {
-            var item = g.items[ii];
-            if (item.type === 'item') {
-              g.updateItem(g, item);
-            } else if(item.type === 'good') {
-              g.updateGood(g, item);
-            }
-          }
-        }
-        g.updateCounters();
+        g.updateAllItems(g);
       }, 1000);
   }(this));
 
 };
 
-theGame = new Game(Gitems);
+new Game(Gitems);
