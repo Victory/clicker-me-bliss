@@ -148,9 +148,9 @@ var Game = function(items) {
 
   this.buyBarrack = function(id) {
     return function(evt) {
-      var btn = gId(id);
-      btn.disabled = true;
-    };
+      this.items[id].owned = true;
+      gId(id).disabled = true;
+    }.bind(this);
   };
 
   this.bindBuyGoodCreator = function(id) {
