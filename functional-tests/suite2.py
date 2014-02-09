@@ -128,6 +128,11 @@ class Suite2(object):
         sleep(1.1)
         assert int(self.tg1.text) == startt + 1
 
+    def test_buy_barrack(self):
+        assert not self.b1.get_attribute('disabled')
+        self.b1.click()
+        assert self.b1.get_attribute('disabled')
+
     def run_tests(self):
         for name in dir(self):
             if name[0:5] == 'test_':
