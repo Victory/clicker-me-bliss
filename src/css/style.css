@@ -1,3 +1,9 @@
 button.btn {
     color: #338;
 }
+
+button.btn:disabled {
+    color: #777;
+    background: #eee;
+    border: 1px solid #fff;
+}

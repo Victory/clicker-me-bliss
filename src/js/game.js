@@ -146,6 +146,13 @@ var Game = function(items) {
     }.bind(this);
   };
 
+  this.buyBarrack = function(id) {
+    return function(evt) {
+      var btn = gId(id);
+      btn.disabled = true;
+    };
+  };
+
   this.bindBuyGoodCreator = function(id) {
     bind(gId(id),'click', this.buyGoodCreator(id));
     this.bindSell(id);
@@ -157,25 +164,31 @@ var Game = function(items) {
   };
 
   this.bindClick= function(id) {
-    bind(gId(id),'click', this.click(id));
+    bind(gId(id), 'click', this.click(id));
   };
 
   this.bindSell = function(id) {
     var btn = gId("s" + id);
     if (btn) {
-      bind(btn,'click', this.sell(id));
+      bind(btn, 'click', this.sell(id));
     }
   };
 
   this.bindBuyStorage = function (id) {
     var btn = gId("s" + id);
     if (btn) {
-      bind(btn,'click', this.buyStorage(id));
+      bind(btn, 'click', this.buyStorage(id));
+    }
+  };
+
+  this.bindBuyBarrack = function(id) {
+    var btn = gId(id);
+    if (btn) {
+      bind(btn, 'click', this.buyBarrack(id));
     }
   };
 
   var constructor = (function (g) {
-
     forin(
       g.items,
       function (item, resource) {
@@ -186,8 +199,9 @@ var Game = function(items) {
           g.bindBuyResourceCreator(resource);
         } else if (item.type === 'good') {
           g.bindBuyGoodCreator(item.good);
+        } else if (item.type === 'barrack') {
+          g.bindBuyBarrack(item.barrack);
         }
-        //
       }
     );
 

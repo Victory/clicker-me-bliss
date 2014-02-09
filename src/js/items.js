@@ -88,6 +88,7 @@ var Gitems = {
   "b1": {
     "name": "barrack 1",
     "type": "barrack",
+    "barrack": "b1",
     "price": {
       "g1": 20,
       "g2": 20
