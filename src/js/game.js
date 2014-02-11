@@ -57,7 +57,7 @@ var Game = function(items) {
            jj <= item.owned) {
       jj += 1;
       g.items[item.resource].total -= item.resourceCost;
-      g.items[item.good].total += item.owned;
+      g.items[item.good].total += 1;
     }
   };
 
