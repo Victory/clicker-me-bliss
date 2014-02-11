@@ -101,6 +101,7 @@ var Gitems = {
     "maintence": {
       "r1": 5
     },
-    "owned": false
+    "owned": 0,
+    "buying": false
   }
 };
