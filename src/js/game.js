@@ -73,19 +73,19 @@ var Game = function(items) {
           if (g.items[item.barrack].price[good] < 1) {
             return;
           }
-          var mp = Math.max(price, g.items[good].total);
-          var tg = Math.min(mp, g.items[good].total);
-          g.items[good].total -= tg;
+          var mp = Math.min(price, g.items[good].total);
+          g.items[good].total -= mp;
           g.items[item.barrack].priceProgress[good] += mp;
-          g.items[item.barrack].price[good] -= tg;
+          g.items[item.barrack].price[good] -= mp;
         }
       );
 
+      // see if item is fully purchased
       var purchased = true;
       this.forin(
         item.price,
         function (price, good, prices) {
-          if (g.items[item.barrack].price[good] > 0) {
+          if (g.items[item.barrack].price[good] != 0) {
             purchased = false;
             return;
           }
@@ -95,11 +95,10 @@ var Game = function(items) {
       if (purchased) {
         g.items[item.barrack].owned = 1;
         g.items[item.barrack].buying = false;
+      } else {
+        return;
       }
-      return;
-    }
-
-
+    }// item buying
 
     if (item.owned) {
       console.log('update barrack');
