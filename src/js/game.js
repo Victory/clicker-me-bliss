@@ -22,12 +22,15 @@ var Game = function(items) {
     var ii;
     for (ii in g.items) {
       if (g.items.hasOwnProperty(ii) &&
-          g.items[ii].owned > 0) {
+          (g.items[ii].owned > 0 ||
+           g.items[ii].buying)) {
         var item = g.items[ii];
         if (item.type === 'item') {
           g.updateItem(g, item);
         } else if(item.type === 'good') {
           g.updateGood(g, item);
+        } else if(item.type === 'barrack') {
+          g.updateBarrack(g, item);
         }
       }
     }
@@ -55,6 +58,51 @@ var Game = function(items) {
       jj += 1;
       g.items[item.resource].total -= item.resourceCost;
       g.items[item.good].total += item.owned;
+    }
+  };
+
+  this.updateBarrack = function (g, item) {
+    if (item.owned === 0 && !item.buying) {
+      return;
+    }
+
+    if (item.buying) {
+      this.forin(
+        item.price,
+        function (price, good, prices) {
+          if (g.items[item.barrack].price[good] < 1) {
+            return;
+          }
+          var mp = Math.max(price, g.items[good].total);
+          var tg = Math.min(mp, g.items[good].total);
+          g.items[good].total -= tg;
+          g.items[item.barrack].priceProgress[good] += mp;
+          g.items[item.barrack].price[good] -= tg;
+        }
+      );
+
+      var purchased = true;
+      this.forin(
+        item.price,
+        function (price, good, prices) {
+          if (g.items[item.barrack].price[good] > 0) {
+            purchased = false;
+            return;
+          }
+        }
+      );
+
+      if (purchased) {
+        g.items[item.barrack].owned = 1;
+        g.items[item.barrack].buying = false;
+      }
+      return;
+    }
+
+
+
+    if (item.owned) {
+      console.log('update barrack');
     }
   };
 
@@ -148,7 +196,8 @@ var Game = function(items) {
 
   this.buyBarrack = function(id) {
     return function(evt) {
-      this.items[id].owned = true;
+      this.items[id].owned = false;
+      this.items[id].buying = true;
       gId(id).disabled = true;
     }.bind(this);
   };
