@@ -98,7 +98,7 @@ var Gitems = {
       "g2": 0
     },
     "unit": "d1",
-    "maintence": {
+    "maintenance": {
       "r1": 5
     },
     "owned": 0,
