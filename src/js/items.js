@@ -103,5 +103,10 @@ var Gitems = {
     },
     "owned": 0,
     "buying": false
+  },
+  "d1": {
+    "type": "defender",
+    "resource": "d1",
+    "owned": 0
   }
 };

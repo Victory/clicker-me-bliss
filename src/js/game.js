@@ -85,7 +85,7 @@ var Game = function(items) {
       this.forin(
         item.price,
         function (price, good, prices) {
-          if (g.items[item.barrack].price[good] != 0) {
+          if (g.items[item.barrack].price[good] !== 0) {
             purchased = false;
             return;
           }
@@ -97,11 +97,17 @@ var Game = function(items) {
         g.items[item.barrack].buying = false;
       } else {
         return;
-      }
+      } // didn't fully purchase
     }// item buying
 
     if (item.owned) {
-      console.log('update barrack');
+      this.forin(
+        item.maintenance,
+        function (price, resource, prices) {
+          g.items[resource].total -= price;
+          g.items[item.unit].owned += 1;
+        }
+      );
     }
   };
 
@@ -124,6 +130,8 @@ var Game = function(items) {
           });
           num('o' + name, item.owned);
           num('t' + name, item.total);
+        } else if (item.type === 'defender') {
+          num(item.resource, item.owned);
         }
       }
     );
