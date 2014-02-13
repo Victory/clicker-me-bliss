@@ -57,6 +57,10 @@ class Suite2(object):
                     self.elms['p' + kk + resource] = \
                         self.driver.find_element_by_id('p' + kk + resource)
 
+            if vv['type'] == 'barrack':
+                self.elms[vv['unit']] = \
+                    self.driver.find_element_by_id(vv['unit'])
+
         # check that all elms are in fact WebElement
         for elm in self.elms:
             assert type(self.elms[elm]) == \
@@ -132,6 +136,20 @@ class Suite2(object):
         assert not self.b1.get_attribute('disabled')
         self.b1.click()
         assert self.b1.get_attribute('disabled')
+
+        self.click_r_test('r1', 20)
+        self.click_r_test('r2', 20)
+
+        for i in xrange(15):
+            self.g1.click()
+            self.g2.click()
+            for ii in xrange(10):
+                self.r1.click()
+                self.r2.click()
+            if int(self.d1.text) > 0:
+                break
+
+        assert int(self.d1.text) == 1
 
     def run_tests(self):
         for name in dir(self):
