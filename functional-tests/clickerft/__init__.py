@@ -1,0 +1,1 @@
+# clicker functional tests
