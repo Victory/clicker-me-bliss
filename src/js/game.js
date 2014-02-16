@@ -4,8 +4,14 @@ var Game = function(items) {
 
   this.click = function(id) {
     return function (evt) {
+      if (this.items.clicksOwned.total < 1) {
+        this.log("You can't click for resources any more");
+        return;
+      }
       this.totalClicks++;
       this.items[id].total++;
+      this.items.clicksOwned.total -= 1;
+      num('clicksOwned', this.items.clicksOwned.total);
       num('t' + id, this.items[id].total);
     }.bind(this);
   };
@@ -19,6 +25,10 @@ var Game = function(items) {
   };
 
   this.updateAllItems = function(g) {
+    if (g.items.clicksOwned.total < g.items.maxClicks.total) {
+      g.items.clicksOwned.total += 1;
+    }
+
     var ii;
     for (ii in g.items) {
       if (g.items.hasOwnProperty(ii) &&
@@ -136,11 +146,14 @@ var Game = function(items) {
           forin(item.price, function (price, resource) {
             num('p' + name + resource, price);
           });
+        } else if (item.type === 'maxClicks') {
+          num(name, item.total);
+        } else if (item.type === 'clicksOwned') {
+          num(name, item.total);
         }
       }
     );
   }.bind(this);
-
 
   this.buyGoodCreator = function (id) {
     return function (evt) {

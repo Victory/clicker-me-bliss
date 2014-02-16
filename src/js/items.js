@@ -1,4 +1,12 @@
 var Gitems = {
+  "maxClicks" : {
+    "type": "maxClicks",
+    "total": 500
+  },
+  "clicksOwned": {
+    "type": "clicksOwned",
+    "total": 500
+  },
   "r1": {
     "name": "resource 1",
     "type": "resource",
