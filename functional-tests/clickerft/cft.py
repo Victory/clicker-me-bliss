@@ -65,3 +65,46 @@ class Cft(object):
         for elm in self.elms:
             assert type(self.elms[elm]) == \
                 webdriver.remote.webelement.WebElement
+
+    def click_r(self, name, num=1):
+        for ii in xrange(num):
+            self.elms[name].click()
+
+    def click_sr(self, name, num=1):
+        for ii in xrange(num):
+            self.elms["s" + name].click()
+
+    def click_sr_test(self, name, num=1):
+        elm = self.elms["s" + name]
+        ms = self.elms["ms" + name]
+        start = int(ms.text)
+        for ii in xrange(num):
+            elm.click()
+        fin = int(ms.text)
+        assert fin == start + num
+
+    def click_r_test(self, name, num=1):
+        tr = self.elms["t" + name]
+        start = int(tr.text)
+        self.click_r(name, num)
+        fin = int(tr.text)
+        assert fin == start + num
+
+    def click_i(self, name, num=1):
+        elm = self.elms[name]
+        for ii in xrange(num):
+            elm.click()
+
+    def click_i_test(self, name, num=1):
+        oi = self.elms["o" + name]
+        start = int(oi.text)
+        self.click_i(name, num)
+        fin = int(oi.text)
+        assert fin == start + num
+
+
+    def __getattr__(self, name):
+        if name in self.elms:
+            return self.elms[name]
+        msg = "'" + name + "'" + " not set"
+        raise ValueError(msg)
