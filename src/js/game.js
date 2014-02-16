@@ -150,6 +150,10 @@ var Game = function(items) {
           num(name, item.total);
         } else if (item.type === 'clicksOwned') {
           num(name, item.total);
+        } else if (item.type === 'increaseMaxClicks') {
+          num("p" + name, item.price);
+        } else if (item.type === 'increaseClicksPerGeneration') {
+          num("p" + name, item.price);
         }
       }
     );
@@ -226,6 +230,20 @@ var Game = function(items) {
     }.bind(this);
   };
 
+  this.buyIncreaseMaxClicks = function () {
+    return function () {
+      this.items.increaseMaxClicks.price -= 1;
+
+      if (this.items.increaseMaxClicks.price === 0) {
+        this.items.increaseMaxClicks.price =
+          this.items.increaseMaxClicks.initPrice;
+        this.items.maxClicks.total += 1;
+      }
+
+      this.updateCounters();
+    }.bind(this);
+  };
+
   this.bindBuyGoodCreator = function(id) {
     bind(gId(id),'click', this.buyGoodCreator(id));
     this.bindSell(id);
@@ -261,6 +279,11 @@ var Game = function(items) {
     }
   };
 
+  this.bindIncreaseMaxClicks = function () {
+    var btn = gId("increaseMaxClicks");
+    bind(btn, 'click', this.buyIncreaseMaxClicks());
+  };
+
   var constructor = (function (g) {
     forin(
       g.items,
@@ -274,6 +297,8 @@ var Game = function(items) {
           g.bindBuyGoodCreator(item.good);
         } else if (item.type === 'barrack') {
           g.bindBuyBarrack(item.barrack);
+        } else if (item.type === 'increaseMaxClicks') {
+          g.bindIncreaseMaxClicks();
         }
       }
     );
