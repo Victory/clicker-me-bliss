@@ -108,5 +108,29 @@ var Gitems = {
     "type": "defender",
     "resource": "d1",
     "owned": 0
+  },
+  "b2": {
+    "name": "barrack 2",
+    "type": "barrack",
+    "barrack": "b2",
+    "price": {
+      "g1": 100,
+      "g2": 100
+    },
+    "priceProgress": {
+      "g1": 0,
+      "g2": 0
+    },
+    "unit": "d2",
+    "maintenance": {
+      "r1": 5
+    },
+    "owned": 0,
+    "buying": false
+  },
+  "d2": {
+    "type": "defender",
+    "resource": "d2",
+    "owned": 0
   }
 };
