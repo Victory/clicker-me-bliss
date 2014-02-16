@@ -1,5 +1,6 @@
 import os
 import json
+from time import sleep
 
 from selenium import webdriver
 
@@ -106,5 +107,11 @@ class Cft(object):
     def __getattr__(self, name):
         if name in self.elms:
             return self.elms[name]
+
+        elm =  self.driver.find_element_by_id(name)
+        if elm:
+            self.elms[name] = elm
+            return self.elms[name]
+
         msg = "'" + name + "'" + " not set"
         raise ValueError(msg)
