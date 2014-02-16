@@ -9,42 +9,6 @@ class Suite2(Cft):
     """
     sleep = 1
 
-    def click_r(self, name, num=1):
-        for ii in xrange(num):
-            self.elms[name].click()
-
-    def click_sr(self, name, num=1):
-        for ii in xrange(num):
-            self.elms["s" + name].click()
-
-    def click_sr_test(self, name, num=1):
-        elm = self.elms["s" + name]
-        ms = self.elms["ms" + name]
-        start = int(ms.text)
-        for ii in xrange(num):
-            elm.click()
-        fin = int(ms.text)
-        assert fin == start + num
-
-    def click_r_test(self, name, num=1):
-        tr = self.elms["t" + name]
-        start = int(tr.text)
-        self.click_r(name, num)
-        fin = int(tr.text)
-        assert fin == start + num
-
-    def click_i(self, name, num=1):
-        elm = self.elms[name]
-        for ii in xrange(num):
-            elm.click()
-
-    def click_i_test(self, name, num=1):
-        oi = self.elms["o" + name]
-        start = int(oi.text)
-        self.click_i(name, num)
-        fin = int(oi.text)
-        assert fin == start + num
-
     def test_click_resources(self):
         self.click_r_test('r1', 1)
         self.click_r_test('r1', 9)
@@ -93,12 +57,6 @@ class Suite2(Cft):
                 break
 
         assert int(self.d1.text) == 1
-
-    def __getattr__(self, name):
-        if name in self.elms:
-            return self.elms[name]
-        msg = "'" + name + "'" + " not set"
-        raise ValueError(msg)
 
 if __name__ == '__main__':
     s2 = Suite2()
