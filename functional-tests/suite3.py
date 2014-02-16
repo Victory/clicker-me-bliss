@@ -1,6 +1,5 @@
-from time import sleep
-
 from clickerft.cft import Cft
+
 
 class Suite3(Cft):
 
