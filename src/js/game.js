@@ -132,6 +132,10 @@ var Game = function(items) {
           num('t' + name, item.total);
         } else if (item.type === 'defender') {
           num(item.resource, item.owned);
+        } else if (item.type === 'barrack') {
+          forin(item.price, function (price, resource) {
+            num('p' + name + resource, price);
+          });
         }
       }
     );
