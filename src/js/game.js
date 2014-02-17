@@ -25,11 +25,13 @@ var Game = function(items) {
   };
 
   this.updateAllItems = function(g) {
-    if (g.items.clicksOwned.total < g.items.maxClicks.total) {
-      g.items.clicksOwned.total += 1;
+    var ii;
+    for (ii = 0; ii < g.items.increaseClicksPerGeneration.total; ii++) {
+      if (g.items.clicksOwned.total < g.items.maxClicks.total) {
+        g.items.clicksOwned.total += 1;
+      }
     }
 
-    var ii;
     for (ii in g.items) {
       if (g.items.hasOwnProperty(ii) &&
           (g.items[ii].owned > 0 ||
@@ -232,12 +234,38 @@ var Game = function(items) {
 
   this.buyIncreaseMaxClicks = function () {
     return function () {
+      if (this.items.clicksOwned.total < 1) {
+        return;
+      }
+      this.items.clicksOwned.total -= 1;
+      num('clicksOwned', this.items.clicksOwned.total);
+
       this.items.increaseMaxClicks.price -= 1;
 
       if (this.items.increaseMaxClicks.price === 0) {
         this.items.increaseMaxClicks.price =
           this.items.increaseMaxClicks.initPrice;
         this.items.maxClicks.total += 1;
+      }
+
+      this.updateCounters();
+    }.bind(this);
+  };
+
+  this.buyIncreaseClicksPerGeneration = function () {
+    return function () {
+      if (this.items.clicksOwned.total < 1) {
+        return;
+      }
+      this.items.clicksOwned.total -= 1;
+      num('clicksOwned', this.items.clicksOwned.total);
+
+      this.items.increaseClicksPerGeneration.price -= 1;
+
+      if (this.items.increaseClicksPerGeneration.price === 0) {
+        this.items.increaseClicksPerGeneration.price =
+          this.items.increaseClicksPerGeneration.initPrice;
+        this.items.increaseClicksPerGeneration.total += 1;
       }
 
       this.updateCounters();
@@ -284,6 +312,11 @@ var Game = function(items) {
     bind(btn, 'click', this.buyIncreaseMaxClicks());
   };
 
+  this.bindIncreaseClicksPerGeneration = function () {
+    var btn = gId("increaseClicksPerGeneration");
+    bind(btn, 'click', this.buyIncreaseClicksPerGeneration());
+  };
+
   var constructor = (function (g) {
     forin(
       g.items,
@@ -299,6 +332,8 @@ var Game = function(items) {
           g.bindBuyBarrack(item.barrack);
         } else if (item.type === 'increaseMaxClicks') {
           g.bindIncreaseMaxClicks();
+        } else if (item.type === 'increaseClicksPerGeneration') {
+          g.bindIncreaseClicksPerGeneration();
         }
       }
     );

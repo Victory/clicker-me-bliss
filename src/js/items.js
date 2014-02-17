@@ -15,8 +15,9 @@ var Gitems = {
   },
   "increaseClicksPerGeneration" : {
     "type": "increaseClicksPerGeneration",
-    "total": 0,
-    "price": 50
+    "total": 1,
+    "price": 10,
+    "initPrice": 10,
   },
   "r1": {
     "name": "resource 1",
