@@ -8,9 +8,12 @@
   </head>
   <body>
     <h4>Max Clicks</h4>
+
     <div>
       <span id="maxClicks"></span> /
-      <span id="clicksOwned"></span>
+      <span id="clicksOwned"></span> |
+      <span id="clicksPerGeneration"></span> per generation |
+      generations <span id="generation"></span>
     </div>
     <div>
 
@@ -28,11 +31,11 @@
     <h4>Click for Resources</h4>
     <div>
       <button class="btn click" id="r1">
-        Resource1 +1
+        r1 +1
       </button>
       <span class="total" id="tr1">0</span>
       <button class="btn storage" id="sr1">
-        Buy Storage
+        Storage r1
       </button>
       <span class="storagePrice" id="psr1">20</span>
       <span class="total" id="msr1">10</span>
@@ -40,11 +43,11 @@
 
     <div>
       <button class="btn click" id="r2">
-        Resource1 +1
+        r2 +1
       </button>
       <span class="total" id="tr2">0</span>
       <button class="btn storage" id="sr2">
-        Buy Storage
+        Storage r2
       </button>
       <span class="storagePrice" id="psr2">20</span>
       <span class="total" id="msr2">10</span>
@@ -54,7 +57,7 @@
     <h4>Auto Generate Resources</h4>
     <div>
       <button class="btn spend" id="i1">
-        Item
+        Item (r1 + 1)
       </button>
       <span id="pi1r1">20</span>
       <span class="total" id="oi1">0</span>
@@ -62,7 +65,7 @@
 
     <div>
       <button class="btn spend" id="i2">
-        Item
+        Item (r2 + 1)
       </button>
       <span id="pi2r2">20</span>
       <span class="total" id="oi2">0</span>
@@ -70,7 +73,7 @@
 
     <div>
       <button class="btn spend" id="i3">
-        Item
+        Item (r2 + 2)
       </button>
       <span id="pi3r1">20</span>
       <span id="pi3r2">20</span>

@@ -1,14 +1,19 @@
 var Gitems = {
+  "generation": {
+    "type": "generation",
+    "total": 0
+  },
   "maxClicks" : {
     "type": "maxClicks",
-    "total": 5
+    "total": 10
   },
   "clicksOwned": {
     "type": "clicksOwned",
-    "total": 5
+    "total": 10
   },
   "increaseMaxClicks" : {
     "type": "increaseMaxClicks",
+    "increase": "maxClicks",
     "total": 0,
     "initPrice": 10,
     "price": 10,
