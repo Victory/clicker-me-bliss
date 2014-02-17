@@ -4,8 +4,6 @@ from time import sleep
 
 from selenium import webdriver
 
-#BASEDIR = os.path.dirname(os.getcwd())
-#HOME = "file://" + BASEDIR + "/src/"
 from settings import BASEDIR, HOME
 
 class Cft(object):

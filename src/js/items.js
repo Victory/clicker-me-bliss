@@ -1,23 +1,25 @@
 var Gitems = {
   "maxClicks" : {
     "type": "maxClicks",
-    "total": 10
+    "total": 5
   },
   "clicksOwned": {
     "type": "clicksOwned",
-    "total": 10
+    "total": 5
   },
   "increaseMaxClicks" : {
     "type": "increaseMaxClicks",
     "total": 0,
     "initPrice": 10,
-    "price": 10
+    "price": 10,
+    "priceJump": 1.3
   },
   "increaseClicksPerGeneration" : {
     "type": "increaseClicksPerGeneration",
     "total": 1,
     "price": 10,
     "initPrice": 10,
+    "priceJump": 1.3
   },
   "r1": {
     "name": "resource 1",
