@@ -234,7 +234,8 @@ var Game = function(items) {
 
   this.buyIncreaseMaxClicks = function () {
     return function () {
-      if (this.items.clicksOwned.total < 1) {
+      if (this.items.clicksOwned.total < 1 ||
+          this.items.increaseMaxClicks.price <= 0) {
         return;
       }
       this.items.clicksOwned.total -= 1;
@@ -243,6 +244,9 @@ var Game = function(items) {
       this.items.increaseMaxClicks.price -= 1;
 
       if (this.items.increaseMaxClicks.price === 0) {
+        this.items.increaseMaxClicks.initPrice *=
+          this.items.increaseMaxClicks.priceJump;
+
         this.items.increaseMaxClicks.price =
           this.items.increaseMaxClicks.initPrice;
         this.items.maxClicks.total += 1;
@@ -254,7 +258,8 @@ var Game = function(items) {
 
   this.buyIncreaseClicksPerGeneration = function () {
     return function () {
-      if (this.items.clicksOwned.total < 1) {
+      if (this.items.clicksOwned.total < 1 ||
+          this.items.increaseClicksPerGeneration.price <= 0) {
         return;
       }
       this.items.clicksOwned.total -= 1;
@@ -265,6 +270,9 @@ var Game = function(items) {
       if (this.items.increaseClicksPerGeneration.price === 0) {
         this.items.increaseClicksPerGeneration.price =
           this.items.increaseClicksPerGeneration.initPrice;
+        this.items.increaseClicksPerGeneration.initPrice *=
+          this.items.increaseClicksPerGeneration.priceJump;
+
         this.items.increaseClicksPerGeneration.total += 1;
       }
 
