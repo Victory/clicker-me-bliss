@@ -326,10 +326,33 @@ var Game = function(items) {
       }
     );
 
+    (function () {
+      var btn = gId("pausePlay");
+      btn.addEventListener(
+        'click',
+        function() {
+          var text = ''
+          if (gameState === 'pause') {
+            text = "Pause";
+            gameState = 'play';
+          } else {
+            text = "Play";
+            gameState = 'pause';
+          }
+          text = document.createTextNode(text);
+          btn.innerHTML = '';
+          btn.appendChild(text);
+        }
+      )
+    })();
+
     g.updateCounters();
 
     setInterval(
       function () {
+        if (gameState === 'pause') {
+          return;
+        }
         g.items.generation.total += 1;
         g.updateAllItems(g);
       }, 1000);
@@ -337,6 +360,7 @@ var Game = function(items) {
 
 };
 
+var gameState = 'pause';
 (function() {
   var n = new Game(Gitems);
 }());
