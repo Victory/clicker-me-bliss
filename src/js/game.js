@@ -32,6 +32,7 @@ var Game = function(items) {
       }
     }
 
+
     for (ii in g.items) {
       if (g.items.hasOwnProperty(ii) &&
           (g.items[ii].owned > 0 ||
@@ -156,6 +157,9 @@ var Game = function(items) {
           num("p" + name, item.price);
         } else if (item.type === 'increaseClicksPerGeneration') {
           num("p" + name, item.price);
+          num('clicksPerGeneration', item.total);
+        } else if (item.type === 'generation') {
+          num('generation', this.items.generation.total);
         }
       }
     );
@@ -232,48 +236,30 @@ var Game = function(items) {
     }.bind(this);
   };
 
-  this.buyIncreaseMaxClicks = function () {
+  this.buyClicks = function (name)  {
     return function () {
-      if (this.items.clicksOwned.total < 1 ||
-          this.items.increaseMaxClicks.price <= 0) {
+      var item = this.items[name];
+
+      if (this.items.clicksOwned.total < 1) {
         return;
       }
       this.items.clicksOwned.total -= 1;
       num('clicksOwned', this.items.clicksOwned.total);
 
-      this.items.increaseMaxClicks.price -= 1;
+      this.items[name].price -= 1;
 
-      if (this.items.increaseMaxClicks.price === 0) {
-        this.items.increaseMaxClicks.initPrice *=
-          this.items.increaseMaxClicks.priceJump;
+      if (item.price === 0) {
+        this.items[name].initPrice *=
+          item.priceJump;
+        this.items[name].initPrice = Math.floor(this.items[name].initPrice);
 
-        this.items.increaseMaxClicks.price =
-          this.items.increaseMaxClicks.initPrice;
-        this.items.maxClicks.total += 1;
-      }
-
-      this.updateCounters();
-    }.bind(this);
-  };
-
-  this.buyIncreaseClicksPerGeneration = function () {
-    return function () {
-      if (this.items.clicksOwned.total < 1 ||
-          this.items.increaseClicksPerGeneration.price <= 0) {
-        return;
-      }
-      this.items.clicksOwned.total -= 1;
-      num('clicksOwned', this.items.clicksOwned.total);
-
-      this.items.increaseClicksPerGeneration.price -= 1;
-
-      if (this.items.increaseClicksPerGeneration.price === 0) {
-        this.items.increaseClicksPerGeneration.price =
-          this.items.increaseClicksPerGeneration.initPrice;
-        this.items.increaseClicksPerGeneration.initPrice *=
-          this.items.increaseClicksPerGeneration.priceJump;
-
-        this.items.increaseClicksPerGeneration.total += 1;
+        this.items[name].price =
+          item.initPrice;
+        if (item.type === "increaseMaxClicks") {
+          this.items.maxClicks.total += 1;
+        } else if (item.type === 'increaseClicksPerGeneration') {
+          this.items.increaseClicksPerGeneration.total += 1;
+        }
       }
 
       this.updateCounters();
@@ -315,14 +301,9 @@ var Game = function(items) {
     }
   };
 
-  this.bindIncreaseMaxClicks = function () {
-    var btn = gId("increaseMaxClicks");
-    bind(btn, 'click', this.buyIncreaseMaxClicks());
-  };
-
-  this.bindIncreaseClicksPerGeneration = function () {
-    var btn = gId("increaseClicksPerGeneration");
-    bind(btn, 'click', this.buyIncreaseClicksPerGeneration());
+  this.bindBuyClicks = function (name) {
+    var btn = gId(name);
+    bind(btn, 'click', this.buyClicks(name));
   };
 
   var constructor = (function (g) {
@@ -338,10 +319,9 @@ var Game = function(items) {
           g.bindBuyGoodCreator(item.good);
         } else if (item.type === 'barrack') {
           g.bindBuyBarrack(item.barrack);
-        } else if (item.type === 'increaseMaxClicks') {
-          g.bindIncreaseMaxClicks();
-        } else if (item.type === 'increaseClicksPerGeneration') {
-          g.bindIncreaseClicksPerGeneration();
+        } else if (item.type === 'increaseMaxClicks' ||
+                   item.type === 'increaseClicksPerGeneration') {
+          g.bindBuyClicks(item.type);
         }
       }
     );
@@ -350,6 +330,7 @@ var Game = function(items) {
 
     setInterval(
       function () {
+        g.items.generation.total += 1;
         g.updateAllItems(g);
       }, 1000);
   }(this));
