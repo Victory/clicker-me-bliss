@@ -2,12 +2,12 @@ from clickerft.cft import Cft
 from time import sleep
 
 
-class Suite4(Cft):
+class Suite(Cft):
 
     def test_buy_target_max_and_gen(self):
         """
-        buy clicks until  we have 50 max clicks of 50
-        and 10 clicks/sec
+        buy clicks until  we have target max clicks
+        and targe clicks/sec
         """
         targetGen = 4
         while int(self.clicksPerGeneration.text) < targetGen:
@@ -27,4 +27,4 @@ class Suite4(Cft):
 
 
 if __name__ == '__main__':
-    Suite4()
+    Suite()
