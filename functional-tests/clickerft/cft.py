@@ -23,6 +23,7 @@ class Cft(object):
         self.driver = webdriver.Firefox()
         self.driver.get(HOME + "index.html")
         self.read_items()
+        self.driver.find_element_by_id('pausePlay').click()
 
     def tearDownTest(self):
         self.driver.close()
