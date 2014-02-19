@@ -19,6 +19,20 @@ class Cft(object):
                 getattr(self, name)()
                 self.tearDownTest()
 
+    def assertEquals(self, expected, actual, msg=None):
+        try:
+            assert expected == actual
+            return True
+        except Exception:
+            if msg:
+                print "ERROR:", msg
+            else:
+                print e
+        print "expected:", expected
+        print "actual:", actual
+
+        return False
+
     def setUpTest(self):
         self.driver = webdriver.Firefox()
         self.driver.get(HOME + "index.html")
@@ -101,7 +115,6 @@ class Cft(object):
         self.click_i(name, num)
         fin = int(oi.text)
         assert fin == start + num
-
 
     def __getattr__(self, name):
         if name in self.elms:
