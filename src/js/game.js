@@ -331,17 +331,9 @@ var Game = function(items) {
       btn.addEventListener(
         'click',
         function() {
-          var text = ''
-          if (gameState === 'pause') {
-            text = "Pause";
-            gameState = 'play';
-          } else {
-            text = "Play";
-            gameState = 'pause';
-          }
-          text = document.createTextNode(text);
-          btn.innerHTML = '';
-          btn.appendChild(text);
+          gameState = 'play';
+          btn.outerHTML = ''
+          delete btn;
         }
       )
     })();
