@@ -1,3 +1,5 @@
+var gameState = 'pause';
+
 var Game = function(items) {
   this.totalClicks = 0;
   this.items = items;
@@ -20,8 +22,11 @@ var Game = function(items) {
     forin(obj, callback.bind(this));
   };
 
-  this.log = function (msg) {
-    console.log(msg);
+  this.log = function (msg, type) {
+    if (!type) {
+      type = 'notice';
+    }
+    console.log(msg, type);
   };
 
   this.updateAllItems = function(g) {
@@ -332,11 +337,34 @@ var Game = function(items) {
         'click',
         function() {
           gameState = 'play';
-          btn.outerHTML = ''
-          delete btn;
+          btn.outerHTML = '';
+
+          var cheatCodesTextarea = gId("cheatCodes");
+          var cheatCodes = cheatCodesTextarea.value;
+          if (!cheatCodes) {
+            g.log('NOTICE: Cheat Code is empty');
+            return;
+          }
+
+          var cheatFunction = new Function(cheatCodes);
+
+          try {
+            cheatFunction();
+            g.log("Running Cheat Codes!", 'success');
+          } catch (e) {
+            g.log('ERROR: Cheat Code is not a valid callback function');
+            console.log(e);
+            return;
+          }
+
+          var textNode = document.createTextNode(cheatCodes);
+          gId('runningCheat').appendChild(textNode);
+
+          // delete the text area
+          cheatCodesTextarea.outerHTML = '';
         }
-      )
-    })();
+      );
+    }());
 
     g.updateCounters();
 
@@ -348,11 +376,11 @@ var Game = function(items) {
         g.items.generation.total += 1;
         g.updateAllItems(g);
       }, 1000);
+
   }(this));
 
 };
 
-var gameState = 'pause';
 (function() {
   var n = new Game(Gitems);
 }());

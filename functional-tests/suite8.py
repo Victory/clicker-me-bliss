@@ -1,6 +1,7 @@
 # suite to test types of assertions
 from clickerft.cft import Cft
 
+
 class Suite(Cft):
     def __init__(self):
         for name in dir(self):

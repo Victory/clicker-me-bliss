@@ -13,7 +13,7 @@ class Suite(Cft):
         cc = self.driver.find_element_by_id("cheatCodes")
         cf = self.driver.find_element_by_id("runningCheat")
 
-        function_string = "function() { console.log('yay!') }"
+        function_string = "console.log('yay!')"
         cc.send_keys(function_string)
         self.driver.find_element_by_id('pausePlay').click()
 
