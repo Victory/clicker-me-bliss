@@ -8,7 +8,7 @@ from settings import BASEDIR, HOME
 
 class Cft(object):
     elms = {}
-
+    home = HOME
     def __init__(self):
         self.run_tests()
 

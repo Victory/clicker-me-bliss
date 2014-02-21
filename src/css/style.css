@@ -9,6 +9,11 @@ button.btn:disabled {
 }
 
 h4 {
-   margin: 5px 0 5px 0;
-   padding: 0;
+    margin: 5px 0 5px 0;
+    padding: 0;
+}
+
+#cheatCodes {
+    width: 800px;
+    height: 200px;
 }
