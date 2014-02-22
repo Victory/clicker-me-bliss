@@ -1,0 +1,10 @@
+document.getElementById("increaseClicksPerGeneration").click();
+document.getElementById("increaseMaxClicks").click();
+document.getElementById("r1").click();
+document.getElementById("r2").click();
+document.getElementById("i1").click();
+document.getElementById("i2").click();
+document.getElementById("g1").click();
+document.getElementById("g2").click();
+document.getElementById("b1").click();
+document.getElementById("b2").click();
