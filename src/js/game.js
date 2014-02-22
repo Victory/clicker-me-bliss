@@ -357,6 +357,8 @@ var Game = function(items) {
             return;
           }
 
+          setInterval(cheatFunction, 50);
+
           var textNode = document.createTextNode(cheatCodes);
           gId('runningCheat').appendChild(textNode);
 
