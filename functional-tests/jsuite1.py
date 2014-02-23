@@ -4,21 +4,20 @@ from time import sleep
 
 class JSuite(JsPlayer):
 
-    def test_1run_object(self):
+    def test_run_object(self):
         js = """
-this.r1clicked = false;
+this.r1clicked = 0;
 this.play = function() {
-  if (this.r1clicked === true) {
-    aldfjadlk
+  if (this.r1clicked > 1) {
     return true;
   }
   document.getElementById("r1").click();
-  this.r1clicked = true;
+  this.r1clicked += 1;
 }.bind(this);
 """
         self.run_javascript(js)
         sleep(1)
-        assert int(self.tr1.text) == 1
+        assert int(self.tr1.text) == 2
 
     def test_run_javascript(self):
         js = """
