@@ -5,7 +5,6 @@ from settings import HOME
 
 
 class JsPlayer(Cft):
-    js = ''
 
     def __init__(self):
         """Set up a player who plays via javascript
