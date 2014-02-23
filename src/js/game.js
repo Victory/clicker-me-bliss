@@ -346,10 +346,11 @@ var Game = function(items) {
             return;
           }
 
-          var cheatFunction = new Function(cheatCodes);
+          var cheater = new Function(cheatCodes);
 
+          var result = {};
           try {
-            cheatFunction();
+            result = new cheater();
             g.log("Running Cheat Codes!", 'success');
           } catch (e) {
             g.log('ERROR: Cheat Code is not a valid callback function');
@@ -357,7 +358,33 @@ var Game = function(items) {
             return;
           }
 
-          setInterval(cheatFunction, 50);
+          if (result.play) {
+            g.log("Running as object (using this.play)");
+            var oldPlay = result.play;
+            result.play = function() {
+              try {
+                oldPlay();
+              } catch (e) {
+                g.log('ERROR: In Player (check console output)',
+                      'error');
+                console.log(e);
+              }
+            };
+            setInterval(result.play, 50);
+          } else {
+            g.log("Running as function");
+            var oldCheater = cheater;
+            cheater = function () {
+              try {
+                oldCheater();
+              } catch (e) {
+                g.log('ERROR: Cheater Function (check console output)',
+                      'error');
+                console.log(e);
+              }
+            };
+            setInterval(cheater, 50);
+          }
 
           var textNode = document.createTextNode(cheatCodes);
           gId('runningCheat').appendChild(textNode);
