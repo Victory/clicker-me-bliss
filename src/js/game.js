@@ -341,7 +341,14 @@ var Game = function(items) {
 
           var cheatCodesTextarea = gId("cheatCodes");
           var cheatCodes = cheatCodesTextarea.value;
+
+          var textNode = document.createTextNode(cheatCodes);
+          gId('runningCheat').appendChild(textNode);
+          // delete the text area
+          cheatCodesTextarea.outerHTML = '';
+
           if (!cheatCodes) {
+            gId("cheatCodeInfo").outerHTML = '';
             g.log('NOTICE: Cheat Code is empty');
             return;
           }
@@ -362,6 +369,9 @@ var Game = function(items) {
             g.log("Running as object (using this.play)");
             var oldPlay = result.play;
             result.play = function() {
+              if (gameState !== 'play') {
+                return;
+              }
               try {
                 oldPlay();
               } catch (e) {
@@ -375,6 +385,10 @@ var Game = function(items) {
             g.log("Running as function");
             var oldCheater = cheater;
             cheater = function () {
+              if (gameState !== 'play') {
+                return;
+              }
+
               try {
                 oldCheater();
               } catch (e) {
@@ -385,12 +399,6 @@ var Game = function(items) {
             };
             setInterval(cheater, 50);
           }
-
-          var textNode = document.createTextNode(cheatCodes);
-          gId('runningCheat').appendChild(textNode);
-
-          // delete the text area
-          cheatCodesTextarea.outerHTML = '';
         }
       );
     }());
@@ -399,7 +407,7 @@ var Game = function(items) {
 
     setInterval(
       function () {
-        if (gameState === 'pause') {
+        if (gameState !== 'play') {
           return;
         }
         g.items.generation.total += 1;
