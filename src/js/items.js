@@ -9,7 +9,7 @@ var Gitems = {
   },
   "clicksOwned": {
     "type": "clicksOwned",
-    "total": 10
+    "total": 5
   },
   "increaseMaxClicks" : {
     "type": "increaseMaxClicks",
