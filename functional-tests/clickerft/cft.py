@@ -9,6 +9,8 @@ from settings import BASEDIR, HOME
 class Cft(object):
     elms = {}
     home = HOME
+    sleep_wait = .5
+
     def __init__(self):
         self.run_tests()
 
@@ -49,6 +51,7 @@ class Cft(object):
         items = items[items.find('{'):-1]
         items = json.loads(items)
 
+        self.clicks_owned = self.driver.find_element_by_id('clicksOwned')
         obj = items
         for kk, vv in obj.iteritems():
             self.elms[kk] = self.driver.find_element_by_id(kk)
@@ -80,8 +83,13 @@ class Cft(object):
             assert type(self.elms[elm]) == \
                 webdriver.remote.webelement.WebElement
 
+    def wait_for_clicks(self):
+        while int(self.clicks_owned.text) < 1:
+            sleep(self.sleep_wait)
+
     def click_r(self, name, num=1):
         for ii in xrange(num):
+            self.wait_for_clicks()
             self.elms[name].click()
 
     def click_sr(self, name, num=1):
