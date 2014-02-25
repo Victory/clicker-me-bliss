@@ -311,6 +311,38 @@ var Game = function(items) {
     bind(btn, 'click', this.buyClicks(name));
   };
 
+  this.updateVisualFeedback = function (g) {
+    var owned = g.items.clicksOwned.total;
+    var max = g.items.maxClicks.total;
+    var vf = gId("visualFeedback");
+
+    var color = "#F00";
+    var baseColor = "#FFF";
+
+    var fb;
+    var ii;
+
+    for (ii=0; ii < max; ii++) {
+      fb = document.getElementById("feedback" + ii);
+      if (!fb) {
+        var elm = ce('span');
+        elm.id = "feedback" + ii;
+        elm.appendChild(document.createTextNode("+"));
+        gId("visualFeedback").appendChild(elm);
+        fb = document.getElementById("feedback" + ii);
+      }
+      fb.style.color = baseColor;
+    }
+
+    for (ii=0; ii < owned; ii++) {
+      fb = document.getElementById("feedback" + ii);
+      if (!fb) {
+        return;
+      }
+      fb.style.color = color;
+    }
+  };
+
   var constructor = (function (g) {
     forin(
       g.items,
@@ -330,6 +362,8 @@ var Game = function(items) {
         }
       }
     );
+
+    //g.bindUpdateVisualFeedback(g);
 
     (function () {
       var btn = gId("pausePlay");
@@ -404,6 +438,11 @@ var Game = function(items) {
     }());
 
     g.updateCounters();
+
+    setInterval(
+      function () {
+        g.updateVisualFeedback(g);
+      }, 100);
 
     setInterval(
       function () {

@@ -1,5 +1,5 @@
 function ce(name) {
-  return document.createElment(name);
+  return document.createElement(name);
 }
 
 function clickCheck (elm) {
