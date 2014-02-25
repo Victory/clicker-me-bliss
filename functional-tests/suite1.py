@@ -16,15 +16,19 @@ driver.get(HOME + "/src/index.html")
 # check the homepage title
 assert driver.title == 'Clicker Me Bliss'
 
+# start playing
+driver.find_element_by_id('pausePlay').click()
 
 # get i1 so we can see how much it costs
 psr1 = driver.find_element_by_id('psr1')
+clicksOwned = driver.find_element_by_id('clicksOwned')
 
 # click on the r1 button enough times to buy s1
 r1 = driver.find_element_by_id('r1')
 for ii in xrange(int(psr1.text)):
     r1.click()
-    sleep(clickwait)
+    while int(clicksOwned.text) < 1:
+        sleep(clickwait)
 tr1 = driver.find_element_by_id('tr1')
 # make sure we have 10 new resouces
 assert int(tr1.text) == int(psr1.text)
@@ -33,7 +37,8 @@ assert int(tr1.text) == int(psr1.text)
 r2 = driver.find_element_by_id('r2')
 for ii in xrange(10):
     r2.click()
-    sleep(clickwait)
+    while int(clicksOwned.text) < 1:
+        sleep(clickwait)
 tr2 = driver.find_element_by_id('tr2')
 assert tr2.text == '10'
 
@@ -44,7 +49,7 @@ sr1 = driver.find_element_by_id('sr1')
 sr1.click()
 assert int(msr1.text) > int(msr1_start_price)
 
-# do the same for s2 as you did for s1
+# do the same for s2 as we did for s1
 msr2 = driver.find_element_by_id('msr2')
 msr2_start_price = msr2.text
 sr2 = driver.find_element_by_id('sr2')
@@ -64,7 +69,8 @@ assert int(tr1.text) == 0
 pi1r1 = driver.find_element_by_id('pi1r1')
 for ii in xrange(int(pi1r1.text)):
     r1.click()
-    sleep(clickwait)
+    while int(clicksOwned.text) < 1:
+        sleep(clickwait)
 # make sure we have the new item
 i1.click()
 assert int(oi1.text) == 1
