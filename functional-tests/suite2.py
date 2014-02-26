@@ -41,21 +41,25 @@ class Suite2(Cft):
 
     def test_buy_barrack(self):
         assert not self.b1.get_attribute('disabled')
+
+        self.click_r_test('r1', 5)
+        self.g1.click()
+        assert int(self.og1.text) == 1
+        self.click_r_test('r2', 5)
+        self.g2.click()
+        assert int(self.og2.text) == 1
+
+        pg1 = int(self.pb1g1.text)
+        pg2 = int(self.pb1g2.text)
+
+        while int(self.tg1.text) < pg1:
+            self.click_r('r1')
+        while int(self.tg2.text) < pg2:
+            self.click_r('r2')
+
         self.b1.click()
         assert self.b1.get_attribute('disabled')
-
-        self.click_r_test('r1', 20)
-        self.click_r_test('r2', 20)
-
-        for i in xrange(15):
-            self.g1.click()
-            self.g2.click()
-            for ii in xrange(10):
-                self.r1.click()
-                self.r2.click()
-            if int(self.d1.text) > 0:
-                break
-
+        sleep(1)
         assert int(self.d1.text) == 1
 
 if __name__ == '__main__':
