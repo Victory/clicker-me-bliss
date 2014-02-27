@@ -52,6 +52,9 @@ class Cft(object):
         items = json.loads(items)
 
         self.clicks_owned = self.driver.find_element_by_id('clicksOwned')
+        self.max_clicks = self.driver.find_element_by_id('maxClicks')
+        self.generation = self.driver.find_element_by_id('generation')
+
         obj = items
         for kk, vv in obj.iteritems():
             self.elms[kk] = self.driver.find_element_by_id(kk)
