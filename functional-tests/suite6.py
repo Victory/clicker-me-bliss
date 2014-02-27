@@ -1,3 +1,5 @@
+from time import sleep
+
 from clickerft.cft import Cft
 
 
@@ -8,19 +10,23 @@ class Suite(Cft):
         buy clicks until  we have target max clicks
         and targe clicks/sec
         """
-        targetGen = 4
+        clickwait = .5
+        targetGen = 3
         while int(self.clicksPerGeneration.text) < targetGen:
             clicksOwned = int(self.clicksOwned.text)
             priceGen = int(self.pincreaseClicksPerGeneration.text)
             for ii in xrange(min(clicksOwned, priceGen)):
+                while int(self.clicksOwned.text) < 1:
+                    sleep(clickwait)
                 self.increaseClicksPerGeneration.click()
         assert int(self.clicksPerGeneration.text) == targetGen
 
-        targetMax = 12
+        targetMax = 7
         while int(self.maxClicks.text) < targetMax:
-            clicksOwned = int(self.clicksOwned.text)
             priceMax = int(self.pincreaseMaxClicks.text)
-            for ii in xrange(min(clicksOwned, priceMax)):
+            for ii in xrange(priceMax):
+                while int(self.clicksOwned.text) < 1:
+                    sleep(clickwait)
                 self.increaseMaxClicks.click()
         assert int(self.maxClicks.text) == targetMax
 
