@@ -1,10 +1,10 @@
-import os
 import json
 from time import sleep
 
 from selenium import webdriver
 
 from settings import BASEDIR, HOME
+
 
 class Cft(object):
     elms = {}
@@ -25,7 +25,7 @@ class Cft(object):
         try:
             assert expected == actual
             return True
-        except Exception:
+        except Exception, e:
             if msg:
                 print "ERROR:", msg
             else:
@@ -43,7 +43,6 @@ class Cft(object):
 
     def tearDownTest(self):
         self.driver.close()
-
 
     def read_items(self):
         f = open(BASEDIR + "/src/js/items.js", 'r')
@@ -131,7 +130,7 @@ class Cft(object):
         if name in self.elms:
             return self.elms[name]
 
-        elm =  self.driver.find_element_by_id(name)
+        elm = self.driver.find_element_by_id(name)
         if elm:
             self.elms[name] = elm
             return self.elms[name]
