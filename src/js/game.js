@@ -3,6 +3,9 @@ var gameState = 'pause';
 var Game = function(items) {
   this.totalClicks = 0;
   this.items = items;
+  this.version_gameplay = '00';
+  this.version_balance = '00';
+  this.version_bugfix = '00';
 
   this.click = function(id) {
     return function (evt) {
@@ -56,7 +59,7 @@ var Game = function(items) {
   };
 
   this.updateItem = function(g, item) {
-    var ii = 0;
+    var kk = 0;
     for (kk = 0; kk < item.owned; kk++) {
       var total = g.items[item.resource].total;
       var maxStorage = g.items[item.resource].maxStorage;
@@ -344,6 +347,17 @@ var Game = function(items) {
   };
 
   var constructor = (function (g) {
+    // constructor function
+
+    forin(
+      ["gameplay", "balance", "bugfix"],
+      function (kk) {
+        console.log(kk);
+        var vv = g['version_' + kk];
+        var text = document.createTextNode(vv);
+        gId(kk).appendChild(text);
+    });
+
     forin(
       g.items,
       function (item, resource) {
@@ -362,8 +376,6 @@ var Game = function(items) {
         }
       }
     );
-
-    //g.bindUpdateVisualFeedback(g);
 
     (function () {
       var btn = gId("pausePlay");
