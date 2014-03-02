@@ -40,7 +40,6 @@ var Game = function(items) {
       }
     }
 
-
     for (ii in g.items) {
       if (g.items.hasOwnProperty(ii) &&
           (g.items[ii].owned > 0 ||
@@ -399,7 +398,9 @@ var Game = function(items) {
             return;
           }
 
+          /*jslint evil: true */
           var cheater = new Function(cheatCodes);
+          /*jslint evil: false */
 
           var result = {};
           try {
