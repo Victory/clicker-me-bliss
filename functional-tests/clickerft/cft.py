@@ -54,6 +54,10 @@ class Cft(object):
         self.max_clicks = self.driver.find_element_by_id('maxClicks')
         self.generation = self.driver.find_element_by_id('generation')
 
+        self.bugfix = self.driver.find_element_by_id('bugfix').text
+        self.balance = self.driver.find_element_by_id('balance').text
+        self.gameplay = self.driver.find_element_by_id('gameplay').text
+
         obj = items
         for kk, vv in obj.iteritems():
             self.elms[kk] = self.driver.find_element_by_id(kk)
