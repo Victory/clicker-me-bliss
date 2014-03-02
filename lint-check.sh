@@ -9,17 +9,22 @@ HTMLPATH=$(git status --porcelain | grep ".*html$" | awk '{print $2}')
 CSSPATH=$(git status --porcelain | grep ".*css$" | awk '{print $2}')
 PYTHONPATH=$(git status --porcelain | grep ".*py$" | awk '{print $2}')
 
-
+RESULT=0
 if [ ! -z "$JSPATH" ]; then
     echo "js: $JSPATH"
     $LINT  $JSPATH
+    RESULT=$(($? + $RESULT))
 fi
+
 if [ ! -z "$HTMLPATH" ]; then
     echo "html: $HTMLPATH"
     $LINT  $HTMLPATH
+    RESULT=$(($? + $RESULT))
 fi
 
 if [ ! -z "$PYTHONPATH" ]; then
     echo "py: $PYTHONPATH"
     $LINT $PYTHONPATH
+    RESULT=$(($? + $RESULT))
 fi
+exit $RESULT
