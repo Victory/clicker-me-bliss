@@ -345,18 +345,7 @@ var Game = function(items) {
     }
   };
 
-  var constructor = (function (g) {
-    // constructor function
-
-    forin(
-      ["gameplay", "balance", "bugfix"],
-      function (kk) {
-        console.log(kk);
-        var vv = g['version_' + kk];
-        var text = document.createTextNode(vv);
-        gId(kk).appendChild(text);
-    });
-
+  this.bindAll = function(g) {
     forin(
       g.items,
       function (item, resource) {
@@ -375,6 +364,20 @@ var Game = function(items) {
         }
       }
     );
+  }; // bindAll
+
+  this.getVersion = function(g) {
+    forin(
+      ["gameplay", "balance", "bugfix"],
+      function (kk) {
+        console.log(kk);
+        var vv = g['version_' + kk];
+        var text = document.createTextNode(vv);
+        gId(kk).appendChild(text);
+    });
+  }; // getVersion
+
+  this.bindCheats = function(g) {
 
     (function () {
       var btn = gId("pausePlay");
@@ -449,13 +452,21 @@ var Game = function(items) {
         }
       );
     }());
+  };
+
+  var constructor = (function (g) {
+    // constructor function
+
+    g.bindAll(g);
+    g.getVersion(g);
+    g.bindCheats(g);
 
     g.updateCounters();
 
     setInterval(
       function () {
         g.updateVisualFeedback(g);
-      }, 100);
+      }, 100); // visual feed back
 
     setInterval(
       function () {
@@ -464,9 +475,9 @@ var Game = function(items) {
         }
         g.items.generation.total += 1;
         g.updateAllItems(g);
-      }, 1000);
+      }, 1000); // update game state
 
-  }(this));
+  }(this)); // constructor
 
 };
 
