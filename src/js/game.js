@@ -9,6 +9,12 @@ var Game = function(items) {
 
   this.click = function(id) {
     return function (evt) {
+
+      if (gameState !== 'play') {
+        this.log("Game Not Ready");
+        return;
+      }
+
       if (this.items.clicksOwned.total < 1) {
         this.log("You can't click for resources any more");
         return;
@@ -475,7 +481,7 @@ var Game = function(items) {
         }
 
         this.forin(
-          ['r1', 'r2'],
+          ['r1', 'r2', 'r3'],
           function (resource) {
             if (items[resource].total < 0) {
               gameState = 'gameOver';
