@@ -17,3 +17,7 @@ h4 {
     width: 800px;
     height: 200px;
 }
+
+#gameOver {
+    display:none;
+}

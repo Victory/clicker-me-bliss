@@ -370,7 +370,6 @@ var Game = function(items) {
     forin(
       ["gameplay", "balance", "bugfix"],
       function (kk) {
-        console.log(kk);
         var vv = g['version_' + kk];
         var text = document.createTextNode(vv);
         gId(kk).appendChild(text);
@@ -470,9 +469,22 @@ var Game = function(items) {
 
     setInterval(
       function () {
+
         if (gameState !== 'play') {
           return;
         }
+
+        this.forin(
+          ['r1', 'r2'],
+          function (resource) {
+            if (items[resource].total < 0) {
+              gameState = 'gameOver';
+              gId('gameOver').style.color = '#F00';
+              gId('gameOver').style.display = 'block';
+            }
+          }
+        );
+
         g.items.generation.total += 1;
         g.updateAllItems(g);
       }, 1000); // update game state
