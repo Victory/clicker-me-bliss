@@ -46,6 +46,16 @@ var Gitems = {
     "maxStorageJump": 2.0,
     "maxStoragePriceJump": 1.2
   },
+  "r3": {
+    "name": "resource 3",
+    "type": "resource",
+    "total": 0,
+    "resource": "r3",
+    "maxStorage": 5,
+    "maxStoragePrice": 2,
+    "maxStorageJump": 2.0,
+    "maxStoragePriceJump": 1.2
+  },
   "i1": {
     "name": "1 more clicks on r1",
     "type": "item",
