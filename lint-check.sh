@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# Used in .git/hooks/pre-commit with the following code snipet
+#
+# LINT="$(git rev-parse --show-toplevel)/lint-check.sh"
+# $LINT
+# if [ $? -ne 0 ]; then
+#     echo "Not committing do to Lint errors."
+#     exit 1
+# fi
+
 LINT="pocketlint"
 cd "$(git rev-parse --show-toplevel)"
 CWD=$(pwd)
