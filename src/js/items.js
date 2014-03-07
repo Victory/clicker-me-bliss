@@ -102,6 +102,18 @@ var Gitems = {
     "priceJump": 2.0,
     "owned": 0
   },
+  "i5": {
+    "name": "5 more clicks on r3",
+    "type": "item",
+    "price": {
+      "r2": 50,
+      "r3": 50
+    },
+    "resource": "r3",
+    "modifier": 5,
+    "priceJump": 2.0,
+    "owned": 0
+  },
   "g1": {
     "name": "convert resource 1 to good 1",
     "type": "good",
@@ -128,6 +140,22 @@ var Gitems = {
     "resourceCost": 5,
     "winRate": 0.5,
     "good": "g2",
+    "modifier": 1,
+    "priceJump": 1.1,
+    "owned": 0,
+    "total": 0,
+    "maxStorage": 500
+  },
+  "g3": {
+    "name": "convert resource 2 to good 2",
+    "type": "good",
+    "price": {
+      "r3": 50
+    },
+    "resource": "r3",
+    "resourceCost": 1,
+    "winRate": 0.5,
+    "good": "g3",
     "modifier": 1,
     "priceJump": 1.1,
     "owned": 0,
