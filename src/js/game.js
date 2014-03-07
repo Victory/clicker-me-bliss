@@ -72,7 +72,7 @@ var Game = function(items) {
         g.items[item.resource].total -=
           0.25 * (total - maxStorage);
       } else {
-        g.items[item.resource].total += 1;
+        g.items[item.resource].total += item.modifier;
       }
     }
   };
