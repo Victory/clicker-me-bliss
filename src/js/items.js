@@ -90,6 +90,18 @@ var Gitems = {
     "priceJump": 1.1,
     "owned": 0
   },
+  "i4": {
+    "name": "5 more clicks on r1",
+    "type": "item",
+    "price": {
+      "r1": 30,
+      "r2": 30
+    },
+    "resource": "r1",
+    "modifier": 5,
+    "priceJump": 2.0,
+    "owned": 0
+  },
   "g1": {
     "name": "convert resource 1 to good 1",
     "type": "good",
