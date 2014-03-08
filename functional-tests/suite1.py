@@ -1,9 +1,9 @@
-import os
+from os.path import dirname, realpath
 from time import sleep
 
 from selenium import webdriver
 
-BASEDIR = os.path.dirname(os.getcwd())
+BASEDIR = dirname(dirname(realpath(__file__)))
 HOME = "file://" + BASEDIR
 
 clickwait = .05
