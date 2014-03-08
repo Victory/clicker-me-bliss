@@ -1,4 +1,4 @@
-import os
+from os.path import dirname, realpath
 
-BASEDIR = os.path.dirname(os.getcwd())
+BASEDIR = dirname(dirname(dirname(realpath(__file__))))
 HOME = "file://" + BASEDIR + "/src/"
