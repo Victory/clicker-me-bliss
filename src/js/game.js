@@ -324,7 +324,7 @@ var Game = function(items) {
     var max = g.items.maxClicks.total;
     var vf = gId("visualFeedback");
 
-    var color = "#F00";
+    var colors = ["#AAF", "#99F", "#66F", "#33F", "#00F"];
     var baseColor = "#FFF";
 
     var fb;
@@ -347,7 +347,8 @@ var Game = function(items) {
       if (!fb) {
         return;
       }
-      fb.style.color = color;
+      fb.style.color = colors[ii % colors.length];
+      fb.style.backgroundColor = "#334";
     }
   };
 
@@ -459,8 +460,33 @@ var Game = function(items) {
     }());
   };
 
+  this.bindBlink = function () {
+
+    buttons = document.getElementsByTagName('button');
+    var ii;
+    var mouseDown = function () {
+      var blink = gId("visualBlink");
+      blink.style.color = "#F00";
+    };
+
+    var mouseUp = function () {
+      var blink = gId("visualBlink");
+      setTimeout(function () {
+        blink.style.color = "#000";
+      }, 150);
+    };
+
+    for(ii = 0; ii < buttons.length; ii++) {
+      buttons[ii].addEventListener('mousedown', mouseDown);
+      buttons[ii].addEventListener('mouseup', mouseUp);
+    }
+
+  };
+
   var constructor = (function (g) {
     // constructor function
+
+    g.bindBlink();
 
     g.bindAll(g);
     g.getVersion(g);
