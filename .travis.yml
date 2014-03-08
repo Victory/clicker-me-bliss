@@ -9,4 +9,4 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
-script: python functional-tests/buy-barrack3.py
+script: python functional-tests/suite1.py
