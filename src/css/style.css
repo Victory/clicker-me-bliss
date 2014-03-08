@@ -41,3 +41,18 @@ button:hover {
 button:active {
     border: 2px solid #F00;
 }
+
+div.section {
+  float: left;
+  margin-right: 30px;
+  margin-top: 10px;
+}
+
+div#cheats {
+    clear:both;
+    margin-top: 10px;
+}
+
+div#versionInfo {
+    margin-top: 18px;
+}
