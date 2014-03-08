@@ -1,3 +1,6 @@
+body {
+    font-family: monospace;
+}
 button.btn {
     color: #338;
 }
@@ -20,4 +23,21 @@ h4 {
 
 #gameOver {
     display:none;
+}
+
+button {
+    border: 2px solid #88F;
+    background: #eef;
+    color: #003;
+    font-weight: 900;
+    font-family: monospace;
+    margin: 3px;
+}
+
+button:hover {
+    border: 2px solid #00F;
+}
+
+button:active {
+    border: 2px solid #F00;
 }
