@@ -12,31 +12,60 @@
     </div>
 
     <h2 id="gameOver">Game Over</h2>
-
     <button id="pausePlay">
       Click to Start Playing
     </button>
 
-    <h4>Max Clicks</h4>
+    <div class="clearFloat"></div>
 
-    <div>
-      <span id="maxClicks"></span> /
-      <span id="clicksOwned"></span> |
-      <span id="clicksPerGeneration"></span> per generation |
-      generations <span id="generation"></span>
+    <div id="clickStats">
+      <table class="leftAlign" id="gameStats">
+        <tr>
+          <th>Max Clicks</th>
+          <td><span id="maxClicks"></span></td>
+        </tr>
+        <tr>
+          <th class="extraRightPadding">Clicks Owned</th>
+          <td><span id="clicksOwned"></span></td>
+        </tr>
+        <tr>
+          <th>Clicks/Gen</th>
+          <td>
+            <span id="clicksPerGeneration"></span>
+          </td>
+        </tr>
+        <tr>
+          <th>Generation</th>
+          <td><span id="generation"></span></td>
+        </tr>
+      </table>
     </div>
-    <div>
-
-      <button class="btn click" id="increaseMaxClicks">
-        Increase Max Clicks
-      </button>
-      <span id="pincreaseMaxClicks"></span>
-
-      <button class="btn click" id="increaseClicksPerGeneration">
-        Increase Clicks Per Generation
-      </button>
-      <span id="pincreaseClicksPerGeneration"></span>
+    <div id="increaseClicks">
+      <table>
+        <tr>
+          <td>
+            <button class="btn click" id="increaseMaxClicks">
+              Increase Max Clicks
+            </button>
+          </td>
+          <td>
+            <span id="pincreaseMaxClicks"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button class="btn click" id="increaseClicksPerGeneration">
+              Increase Clicks Per Generation
+            </button>
+          </td>
+          <td>
+            <span id="pincreaseClicksPerGeneration"></span>
+          </td>
+        </tr>
+      </table>
     </div>
+
+    <div class="clearFloat"></div>
 
     <div id="resources" class="section">
 
@@ -49,8 +78,8 @@
         <button class="btn storage" id="sr1">
           Storage r1
         </button>
-        <span class="storagePrice" id="psr1"></span>
-        <span class="total" id="msr1"></span>
+        <span class="total" id="msr1"></span> |
+        <span class="storagePrice" id="psr1"></span><span class="cost">r1</span>
       </div>
 
       <div>
@@ -61,8 +90,8 @@
         <button class="btn storage" id="sr2">
           Storage r2
         </button>
-        <span class="storagePrice" id="psr2"></span>
-        <span class="total" id="msr2"></span>
+        <span class="total" id="msr2"></span> |
+        <span class="storagePrice" id="psr2"></span><span class="cost">r2</span>
       </div>
 
       <div>
@@ -73,8 +102,8 @@
         <button class="btn storage" id="sr3">
           Storage r3
         </button>
-        <span class="storagePrice" id="psr3"></span>
-        <span class="total" id="msr3"></span>
+        <span class="total" id="msr3"></span> |
+        <span class="storagePrice" id="psr3"></span><span class="cost">r3</span>
       </div>
     </div><!-- /resources -->
 
@@ -85,56 +114,59 @@
         <button class="btn spend" id="i1">
           Item (r1 + 1)
         </button>
-        <span id="pi1r1"></span>
-        <span class="total" id="oi1"></span>
+        <span class="total" id="oi1"></span> |
+        <span id="pi1r1"></span><span class="cost">r1</span>
       </div>
 
       <div>
         <button class="btn spend" id="i2">
           Item (r2 + 1)
         </button>
-        <span id="pi2r2"></span>
-        <span class="total" id="oi2"></span>
+        <span class="total" id="oi2"></span> |
+        <span id="pi2r2"></span><span class="cost">r2</span>
       </div>
 
       <div>
         <button class="btn spend" id="i3">
           Item (r2 + 2)
         </button>
-        <span id="pi3r1"></span>
-        <span id="pi3r2"></span>
-        <span class="total" id="oi3"></span>
+        <span class="total" id="oi3"></span> |
+        <span id="pi3r1"></span><span class="cost">r1</span>
+        <span id="pi3r2"></span><span class="cost">r2</span>
+
       </div>
 
       <div>
         <button class="btn spend" id="i4">
           Item (r1 + 5)
         </button>
-        <span id="pi4r1"></span>
-        <span id="pi4r2"></span>
-        <span class="total" id="oi4"></span>
+        <span class="total" id="oi4"></span> |
+        <span id="pi4r1"></span><span class="cost">r1</span>
+        <span id="pi4r2"></span><span class="cost">r2</span>
       </div>
 
       <div>
         <button class="btn spend" id="i5">
           Item (r3 + 5)
         </button>
-        <span id="pi5r2"></span>
-        <span id="pi5r3"></span>
-        <span class="total" id="oi5"></span>
+        <span class="total" id="oi5"></span> |
+        <span id="pi5r2"></span><span class="cost">r2</span>
+        <span id="pi5r3"></span><span class="cost">r3</span>
       </div>
     </div><!-- generate resources -->
 
-    <div id="goods" class="section">
+    <div class="clearFloat"></div>
 
+    <div id="goods" class="section">
       <h4>Convert Resources to Goods</h4>
       <div>
         <button class="btn spend" id="g1">
           r1 to g1
         </button>
-        <span id="pg1r1">0</span>
+        <span class="total" id="tg1"></span> |
+        <span id="pg1r1">0</span><span class="cost">r1</span> |
         <span class="owned" id="og1"></span>
-        <span class="total" id="tg1"></span>
+
         <button class="btn spend" id="sg1">
           Sell
         </button>
@@ -144,9 +176,9 @@
         <button class="btn spend" id="g2">
           r2 to g2
         </button>
-        <span id="pg2r2">0</span>
+        <span class="total" id="tg2"></span>  |
+        <span id="pg2r2">0</span><span class="cost">r2</span> |
         <span class="owned" id="og2"></span>
-        <span class="total" id="tg2"></span>
         <button class="btn spend" id="sg2">
           Sell
         </button>
@@ -156,9 +188,9 @@
         <button class="btn spend" id="g3">
           r3 to g3
         </button>
-        <span id="pg3r3"></span>
+        <span class="total" id="tg3"></span> |
+        <span id="pg3r3"></span><span class="cost">r3</span> |
         <span class="owned" id="og3"></span>
-        <span class="total" id="tg3"></span>
         <button class="btn spend" id="sg3">
           Sell
         </button>
@@ -173,8 +205,8 @@
           buy barrack 1
         </button>
         <span class="defenders" id="d1"></span> |
-        <span id="pb1g1"></span>
-        <span id="pb1g2"></span>
+        <span id="pb1g1"></span><span class="cost">g1</span>
+        <span id="pb1g2"></span><span class="cost">g2</span>
       </div>
 
       <div>
@@ -182,8 +214,8 @@
           buy barrack 2
         </button>
         <span class="defenders" id="d2"></span> |
-        <span id="pb2g1"></span>
-        <span id="pb2g2"></span>
+        <span id="pb2g1"></span><span class="cost">g1</span>
+        <span id="pb2g2"></span><span class="cost">g2</span>
       </div>
 
 
@@ -192,7 +224,7 @@
           buy barrack 3
         </button>
         <span class="defenders" id="d3"></span> |
-        <span id="pb3g3"></span>
+        <span id="pb3g3"></span><span class="cost">g3</span>
       </div>
     </div><!-- /defenders -->
 

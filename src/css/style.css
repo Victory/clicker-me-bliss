@@ -56,3 +56,32 @@ div#cheats {
 div#versionInfo {
     margin-top: 18px;
 }
+
+table.leftAlign th {
+    text-align: left;
+}
+
+.extraRightPadding {
+    padding-right: 8px;
+}
+
+table#gameStats td {
+    font-size: 1.3em;
+}
+
+div.clearFloat {
+    clear:both;
+}
+
+span.cost {
+    font-size: .9em;
+    color: #88F;
+    font-weight: bold;
+}
+
+div#increaseClicks {
+}
+
+div#clickStats {
+    float:left;
+}
