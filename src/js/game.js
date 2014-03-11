@@ -35,6 +35,11 @@ var Game = function(items) {
     if (!type) {
       type = 'notice';
     }
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode(msg));
+    var logElm = document.getElementById("log");
+    logElm.insertBefore(p, logElm.firstChild);
+
     console.log(msg, type);
   };
 
