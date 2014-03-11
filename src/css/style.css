@@ -85,3 +85,11 @@ div#increaseClicks {
 div#clickStats {
     float:left;
 }
+
+div#log {
+    font-size:.8em;
+    overflow:auto;
+    height:100px;
+    width: 200px;
+    float:right;
+}
