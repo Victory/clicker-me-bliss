@@ -40,7 +40,14 @@ var Game = function(items) {
     var logElm = document.getElementById("log");
     logElm.insertBefore(p, logElm.firstChild);
 
-    console.log(msg, type);
+    var max = 5;
+    var curElm;
+    var ii;
+    for (ii = max; ii < logElm.childNodes.length; ii++) {
+      curElm = logElm.childNodes[ii];
+      curElm.parentNode.removeChild(curElm);
+      ii = ii + 1;
+    }
   };
 
   this.updateAllItems = function(g) {
@@ -259,6 +266,7 @@ var Game = function(items) {
       var item = this.items[name];
 
       if (this.items.clicksOwned.total < 1) {
+        this.log('You have to wait for more clicks');
         return;
       }
       this.items.clicksOwned.total -= 1;
@@ -275,8 +283,10 @@ var Game = function(items) {
           item.initPrice;
         if (item.type === "increaseMaxClicks") {
           this.items.maxClicks.total += 1;
+          this.log('Max Click Purchased!');
         } else if (item.type === 'increaseClicksPerGeneration') {
           this.items.increaseClicksPerGeneration.total += 1;
+          this.log('Max Clicks Per Generation Purchased!');
         }
       }
 
