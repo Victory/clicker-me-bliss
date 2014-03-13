@@ -532,6 +532,24 @@ var Game = function(items) {
           }
         );
 
+        var defenderWinCount = 5;
+        var defenders = ['d1', 'd2', 'd3'];
+        var defenderSatisfied = 0;
+        this.forin(
+          defenders,
+          function (defender) {
+            if(items[defender].total < defenderWinCount) {
+              return;
+            }
+          }
+        );
+
+        if (defenderSatisfied === defenders.length) {
+          gameState = 'gameWon';
+          gId(gameState).style.color = '#0F0';
+          gId(gameState).style.display = 'block';
+        }
+
         g.items.generation.total += 1;
         g.updateAllItems(g);
       }, 1000); // update game state

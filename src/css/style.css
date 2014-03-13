@@ -25,6 +25,10 @@ h4 {
     display:none;
 }
 
+#gameWon {
+    display:none;
+}
+
 button {
     border: 2px solid #88F;
     background: #eef;
