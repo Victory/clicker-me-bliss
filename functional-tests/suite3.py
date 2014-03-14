@@ -24,7 +24,7 @@ class Suite3(Cft):
         # click should fail
         assert start == fin
 
-    def test_1max_clicks_decreases_on_click(self):
+    def test_max_clicks_decreases_on_click(self):
         start = int(self.pincreaseMaxClicks.text)
         self.increaseMaxClicks.click()
         fin = int(self.pincreaseMaxClicks.text)
