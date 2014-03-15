@@ -1,4 +1,5 @@
 from time import sleep
+from random import shuffle
 
 from clickerft.cft import Cft
 
@@ -28,23 +29,13 @@ class Suite(Cft):
 
         assert int(self.maxClicks.text) == targetMaxClicks
 
-    def buy_all_resources(self, num=100):
+    def buy_all_resources(self, num=1):
+        resources = ['r1', 'r2', 'r3']
+
         for ii in xrange(num):
-            if int(self.clicksOwned.text) < 1:
-                sleep(.5)
-                continue
-            self.click_r_test('r1')
-            if int(self.clicksOwned.text) < 1:
-                sleep(.5)
-                continue
-            self.click_r_test('r2')
-            if int(self.clicksOwned.text) < 1:
-                sleep(.5)
-                continue
-            self.click_r_test('r3')
-            if int(self.clicksOwned.text) < 1:
-                sleep(.5)
-                continue
+            shuffle(resources)
+            for resource in resources:
+                self.click_r(resource)
 
     def buy_all_storage(self, num=1):
         for ii in xrange(num):
@@ -85,16 +76,21 @@ class Suite(Cft):
 
     def test_win(self):
         self.buy_some_clicks()
-        self.buy_all_resources(100)
-        self.buy_all_storage()
-        self.buy_all_items()
+
+        for ii in xrange(10):
+            self.buy_all_resources(20)
+            self.buy_all_storage()
+            self.buy_all_items()
+
+        self.buy_all_goods()
         self.buy_all_baracks()
 
         while not self.have_won():
             sleep(.5)
-            self.buy_all_resources(2)
-
-        print self.generation.text
+            self.buy_all_resources(8)
+            if self.gameState.text == 'gameOver':
+                print "Game Over. Generation:", self.generation.text
+                assert False
 
 
 if __name__ == '__main__':

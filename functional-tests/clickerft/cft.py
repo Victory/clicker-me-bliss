@@ -54,6 +54,8 @@ class Cft(object):
         self.max_clicks = self.driver.find_element_by_id('maxClicks')
         self.generation = self.driver.find_element_by_id('generation')
 
+        self.gameState = self.driver.find_element_by_id('gameState')
+
         self.bugfix = self.driver.find_element_by_id('bugfix').text
         self.balance = self.driver.find_element_by_id('balance').text
         self.gameplay = self.driver.find_element_by_id('gameplay').text
