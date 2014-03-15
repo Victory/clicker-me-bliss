@@ -77,12 +77,12 @@ class Suite(Cft):
     def test_win(self):
         self.buy_some_clicks()
 
-        for ii in xrange(10):
+        for ii in xrange(20):
             self.buy_all_resources(20)
             self.buy_all_storage()
-            self.buy_all_items()
+            self.buy_all_items(3)
 
-        self.buy_all_goods()
+        self.buy_all_goods(5)
         self.buy_all_baracks()
 
         while not self.have_won():
@@ -91,7 +91,7 @@ class Suite(Cft):
             if self.gameState.text == 'gameOver':
                 print "Game Over. Generation:", self.generation.text
                 assert False
-
+        print "Game Won!", self.generation.text
 
 if __name__ == '__main__':
     Suite()
