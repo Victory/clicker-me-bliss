@@ -3,7 +3,7 @@ from time import sleep
 from clickerft.cft import Cft
 
 
-class Suite2(Cft):
+class Suite(Cft):
     """
     classify a test suite
     """
@@ -63,4 +63,4 @@ class Suite2(Cft):
         assert int(self.d1.text) == 1
 
 if __name__ == '__main__':
-    s2 = Suite2()
+    Suite()

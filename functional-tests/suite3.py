@@ -1,7 +1,7 @@
 from clickerft.cft import Cft
 
 
-class Suite3(Cft):
+class Suite(Cft):
 
     def test_clicks_are_limited(self):
         clicksOwned = int(self.clicksOwned.text)
@@ -31,4 +31,4 @@ class Suite3(Cft):
         assert 1 == start - fin
 
 if __name__ == '__main__':
-    Suite3()
+    Suite()
