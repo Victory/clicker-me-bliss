@@ -39,11 +39,11 @@ button {
 }
 
 button:hover {
-    border: 2px solid #00F;
+    border: 2px solid #00f;
 }
 
 button:active {
-    border: 2px solid #F00;
+    border: 2px solid #f0f;
 }
 
 div.section {
@@ -96,12 +96,13 @@ div#log {
     height:120px;
     width: 350px;
     float:right;
+    text-align:right;
 }
 
 div#log p {
     margin:0px;
     padding:0px;
-    margin-top: 1px;
+    margin-top: 5px;
     margin-bottom: 1px;
     border-bottom: 1px dotted #eee;
 }
