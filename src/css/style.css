@@ -106,3 +106,7 @@ div#log p {
     margin-bottom: 1px;
     border-bottom: 1px dotted #eee;
 }
+
+div#gameState {
+    float:right;
+}

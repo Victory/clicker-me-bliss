@@ -516,6 +516,9 @@ var Game = function(items) {
 
     setInterval(
       function () {
+        var gameStateNode = document.createTextNode(gameState);
+        gId('gameState').innerHTML = '';
+        gId('gameState').appendChild(gameStateNode);
 
         if (gameState !== 'play') {
           return;
@@ -531,6 +534,10 @@ var Game = function(items) {
             }
           }
         );
+
+        if (gameState === 'gameOver') {
+          return;
+        }
 
         var defenderWinCount = 5;
         var defenders = ['d1', 'd2', 'd3'];
