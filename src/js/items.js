@@ -223,7 +223,7 @@ var Gitems = {
     },
     "unit": "d3",
     "maintenance": {
-      "r1": 5
+      "r3": 5
     },
     "owned": 0,
     "buying": false
