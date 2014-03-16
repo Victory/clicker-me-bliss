@@ -110,3 +110,8 @@ div#log p {
 div#gameState {
     float:right;
 }
+
+div#visualBox {
+    float:right;
+    font-size: 3em;
+}
