@@ -133,6 +133,7 @@ var Game = function(items) {
       if (purchased) {
         g.items[item.barrack].owned = 1;
         g.items[item.barrack].buying = false;
+        this.log("Purchased Barrack");
       } else {
         return;
       } // didn't fully purchase
@@ -144,6 +145,10 @@ var Game = function(items) {
         function (price, resource, prices) {
           g.items[resource].total -= price;
           g.items[item.unit].owned += 1;
+
+          var percentOwned = Math.min(g.items[item.unit].owned, 100);
+          gId("prog" + item.unit).style.width = percentOwned + "%";
+          gId("prog" + item.unit).textContent = percentOwned + "%";
         }
       );
     }
@@ -214,6 +219,7 @@ var Game = function(items) {
         }
       );
 
+      this.log("Good Creator Purchased");
       this.items[id].owned++;
       this.updateCounters();
       this.totalClicks++;

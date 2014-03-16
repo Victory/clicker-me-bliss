@@ -115,3 +115,11 @@ div#visualBox {
     float:right;
     font-size: 3em;
 }
+
+.gameProgress {
+    background: -webkit-linear-gradient(left, #0F0 , #EF3);
+    background: -o-linear-gradient(right, #0F0 , #EF3);
+    background: -moz-linear-gradient(right, #0F0 , #EF3);
+    background: linear-gradient(to left, #0F0 , #EF3);
+    width: 5px;
+}
