@@ -35,3 +35,8 @@ Defenders (d1, d2, d3) are created by barracks (b1, b2, b3). Barracks
 have a resource upkeep.
 
 If you any of your resources are negative you lose.
+
+
+Beta Testers
+==============
+Beta testers please fork and make pull requests!
