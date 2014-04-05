@@ -1,6 +1,6 @@
 Clicker Me Bliss
 ================
-[![Build Status](https://travis-ci.org/SEOVictory/clicker-me-bliss.png?branch=master)](https://travis-ci.org/SEOVictory/clicker-me-bliss)
+[![Build Status](https://travis-ci.org/Victory/clicker-me-bliss.svg?branch=master)](https://travis-ci.org/Victory/clicker-me-bliss)
 
 A clicker game designed to be played by bots or people.
 
