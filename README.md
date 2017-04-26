@@ -2,7 +2,7 @@ Clicker Me Bliss
 ================
 [![Build Status](https://travis-ci.org/Victory/clicker-me-bliss.svg?branch=master)](https://travis-ci.org/Victory/clicker-me-bliss)
 
-A clicker game designed to be played by bots or people.
+A clicker (aka incremental) game designed to be played by bots or people.
 
 Examples of Python code and javascript are in the repo.
 
