@@ -34,7 +34,7 @@ You can win by by getting 100 of each of the 3 kinds of `defenders`.
 Defenders (d1, d2, d3) are created by barracks (b1, b2, b3). Barracks
 have a resource upkeep.
 
-If you any of your resources are negative you lose.
+If any of your resources are negative you lose.
 
 
 Beta Testers
